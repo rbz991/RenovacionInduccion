@@ -9,7 +9,9 @@ Public Class Main
         Arduino.Open() 'Starts the Arduino-VB communication.
         Countdown = Environment.TickCount + tmrStart.Interval
         tmrStart.Enabled = True
-
+        Arduino.WriteLine("abh")
+        Me.Text = SetUp.txtCOM.Text
+        SetUp.WindowState = FormWindowState.Minimized
         VIList = New List(Of Integer)
         VIGen()
         Do 'This code will run throughout the session to allow response collection. 
@@ -18,35 +20,35 @@ Public Class Main
                     Actual_Response = Split(Arduino.ReadLine(), ",") 'Splits data from the arduino into separate responses.
                 End If
                 If (Actual_Response(0) <> Previous_Response(0) And Actual_Response(0) <> 1) Then
-                    Response(0)
+                    Response(1)
                     btn1.BackColor = Color.Black
                 End If
                 If (Actual_Response(0) <> Previous_Response(0) And Actual_Response(0) <> 0) Then
                     btn1.BackColor = Color.White
                 End If
                 If (Actual_Response(1) <> Previous_Response(1) And Actual_Response(1) <> 1) Then
-                    Response(1)
+                    Response(2)
                     btn2.BackColor = Color.Black
                 End If
                 If (Actual_Response(1) <> Previous_Response(1) And Actual_Response(1) <> 0) Then
                     btn2.BackColor = Color.White
                 End If
                 If (Actual_Response(2) <> Previous_Response(2) And Actual_Response(2) <> 1) Then
-                    Response(2)
+                    Response(3)
                     btn3.BackColor = Color.Black
                 End If
                 If (Actual_Response(2) <> Previous_Response(2) And Actual_Response(2) <> 0) Then
                     btn3.BackColor = Color.White
                 End If
                 If (Actual_Response(3) <> Previous_Response(3) And Actual_Response(3) <> 1) Then
-                    Response(3)
+                    Response(4)
                     btn4.BackColor = Color.Black
                 End If
                 If (Actual_Response(3) <> Previous_Response(3) And Actual_Response(3) <> 0) Then
                     btn4.BackColor = Color.White
                 End If
                 If (Actual_Response(4) <> Previous_Response(4) And Actual_Response(4) <> 1) Then
-                    Response(4)
+                    Response(5)
                     btn5.BackColor = Color.Black
                 End If
                 If (Actual_Response(4) <> Previous_Response(4) And Actual_Response(4) <> 0) Then
@@ -75,10 +77,14 @@ Public Class Main
     Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
         tmrStart.Enabled = False
         vTimeStart = Environment.TickCount
+        Arduino.WriteLine("H")
+
     End Sub
 
     Private Sub Response(x As Byte)
         If tmrStart.Enabled = False Then
+            Arduino.WriteLine("AB")
+            tmrStim.Enabled = True
             ResponseCount(x) += 1
             WriteLine(1, vTimeNow, x)
             If RefRdy = True Then Reinforce()
@@ -130,6 +136,7 @@ Public Class Main
 
     Private Sub SessionOver()
         WriteLine(1, "@")
+        Arduino.WriteLine("hab")
         Arduino.Close()
         FileClose(1)
         btnFinish.Enabled = True
@@ -138,5 +145,10 @@ Public Class Main
     Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
         tmrVI.Enabled = False
         RefRdy = True
+    End Sub
+
+    Private Sub tmrStim_Tick(sender As Object, e As EventArgs) Handles tmrStim.Tick
+        tmrStim.Enabled = False
+        Arduino.WriteLine("ab")
     End Sub
 End Class

@@ -21,7 +21,7 @@
         If Session.Phase = rdoExtinction.Text Then Session.ActiveLever = "None"
         FileOpen(1, Session.File(), OpenMode.Append)
         Session.Heading(1)
-        Me.WindowState = FormWindowState.Minimized
+
         Dim x As New Main
         x.Show()
         x.ArduinoVB()
