@@ -9,6 +9,8 @@ Public Class Main
         Arduino.Open() 'Starts the Arduino-VB communication.
         Countdown = Environment.TickCount + tmrStart.Interval
         tmrStart.Enabled = True
+
+        VIList = New List(Of Integer)
         VIGen()
         Do 'This code will run throughout the session to allow response collection. 
             Try
@@ -55,13 +57,14 @@ Public Class Main
                 Previous_Response(2) = Actual_Response(2)
                 Previous_Response(3) = Actual_Response(3)
                 Previous_Response(4) = Actual_Response(4)
-                If tmrStart.Enabled = False Then vTimeNow = Environment.TickCount - tmrStart.Interval  'This keeps track of time for the Data output file.
+                If tmrStart.Enabled = False Then vTimeNow = Environment.TickCount - vTimeStart  'This keeps track of time for the Data output file.
                 If tmrStart.Enabled = True Then vTimeNow = (Countdown) - Environment.TickCount
                 lblTime.Text = Round(vTimeNow / 1000)
                 lblResponses1.Text = ResponseCount(0)
                 lblResponses2.Text = ResponseCount(1)
                 lblReinforcers.Text = RefCount
                 If RefCount >= 50 Or lblTime.Text >= 1800 Then SessionOver() 'This sets the criteria to finish the session.
+
             Catch ex As Exception
             End Try
             My.Application.DoEvents()
@@ -71,6 +74,7 @@ Public Class Main
 
     Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
         tmrStart.Enabled = False
+        vTimeStart = Environment.TickCount
     End Sub
 
     Private Sub Response(x As Byte)
@@ -92,7 +96,7 @@ Public Class Main
     End Sub
 
     Private Sub VIGen()
-        Dim v = 5
+        Dim v = 3
         Dim n = 10 'This value represents the VI iterations. 
         Dim rd(n)
         Dim vi(n)

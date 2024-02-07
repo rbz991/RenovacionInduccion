@@ -3,6 +3,7 @@
     Public Previous_Response(4) As String
     Public ResponseCount(4) As Integer
     Public vTimeNow As Integer
+    Public vTimeStart As Integer
     Public RefCount As Byte
     Public RefRdy As Boolean
     Public Countdown As Integer
@@ -14,7 +15,7 @@
         Public Phase As String
         Public ActiveLever As String
         Public Function File()
-            Dim x = "C:\Data\" & Subject & "_" & Session & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt"
+            Dim x = "G:\Mi unidad\Datoz\InducciónVar\" & Subject & "_" & Session & "_" & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt"
             Return x
         End Function
         Public Sub Heading(x)
