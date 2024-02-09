@@ -11,6 +11,9 @@ Public Class Main
         tmrStart.Enabled = True
         Arduino.WriteLine("abh")
         Me.Text = SetUp.txtCOM.Text
+        lblSubject.Text = SetUp.txtSubject.Text
+        lblSession.Text = SetUp.txtSession.Text
+        lblCOM.Text = SetUp.txtCOM.Text
         SetUp.WindowState = FormWindowState.Minimized
         VIList = New List(Of Integer)
         VIGen()
@@ -64,6 +67,9 @@ Public Class Main
                 lblTime.Text = Round(vTimeNow / 1000)
                 lblResponses1.Text = ResponseCount(0)
                 lblResponses2.Text = ResponseCount(1)
+                lblResponses3.Text = ResponseCount(2)
+                lblResponses4.Text = ResponseCount(3)
+                lblResponses5.Text = ResponseCount(4)
                 lblReinforcers.Text = RefCount
                 If RefCount >= 50 Or lblTime.Text >= 1800 Then SessionOver() 'This sets the criteria to finish the session.
 
@@ -86,11 +92,11 @@ Public Class Main
             If SetUp.rdoAll.Checked = True Then
                 Arduino.WriteLine("AB")
                 tmrStim.Enabled = True
-                ResponseCount(x) += 1
+                ResponseCount(x - 1) += 1
                 WriteLine(1, vTimeNow, x)
                 If RefRdy = True Then Reinforce()
             ElseIf SetUp.rdoCenter.Checked = True Then
-                ResponseCount(x) += 1
+                ResponseCount(x - 1) += 1
                 WriteLine(1, vTimeNow, x)
                 If x = 3 Then
                     Arduino.WriteLine("AB")
@@ -113,7 +119,7 @@ Public Class Main
     End Sub
 
     Private Sub VIGen()
-        Dim v = 5
+        Dim v = 1
         Dim n = 10 'This value represents the VI iterations. 
         Dim rd(n)
         Dim vi(n)
