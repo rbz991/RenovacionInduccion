@@ -190,7 +190,7 @@ Partial Class SetUp
         Me.Controls.Add(Me.lblSesion)
         Me.Controls.Add(Me.txtCOM)
         Me.Controls.Add(Me.txtSession)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "SetUp"
         Me.Text = "Form1"
         Me.grpActiveLever.ResumeLayout(False)

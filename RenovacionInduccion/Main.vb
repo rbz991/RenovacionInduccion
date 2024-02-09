@@ -83,11 +83,22 @@ Public Class Main
 
     Private Sub Response(x As Byte)
         If tmrStart.Enabled = False Then
-            Arduino.WriteLine("AB")
-            tmrStim.Enabled = True
-            ResponseCount(x) += 1
-            WriteLine(1, vTimeNow, x)
-            If RefRdy = True Then Reinforce()
+            If SetUp.rdoAll.Checked = True Then
+                Arduino.WriteLine("AB")
+                tmrStim.Enabled = True
+                ResponseCount(x) += 1
+                WriteLine(1, vTimeNow, x)
+                If RefRdy = True Then Reinforce()
+            ElseIf SetUp.rdoCenter.Checked = True Then
+                ResponseCount(x) += 1
+                WriteLine(1, vTimeNow, x)
+                If x = 3 Then
+                    Arduino.WriteLine("AB")
+                    tmrStim.Enabled = True
+                    If RefRdy = True Then Reinforce()
+                End If
+            End If
+
         End If
     End Sub
 
@@ -102,7 +113,7 @@ Public Class Main
     End Sub
 
     Private Sub VIGen()
-        Dim v = 3
+        Dim v = 5
         Dim n = 10 'This value represents the VI iterations. 
         Dim rd(n)
         Dim vi(n)

@@ -26,4 +26,12 @@
         x.Show()
         x.ArduinoVB()
     End Sub
+
+    Private Sub rdoAll_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAll.CheckedChanged
+
+    End Sub
+
+    Private Sub rdoCenter_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCenter.CheckedChanged
+
+    End Sub
 End Class

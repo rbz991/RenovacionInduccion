@@ -146,7 +146,7 @@ Partial Class Main
         '
         Me.btn1.BackColor = System.Drawing.Color.White
         Me.btn1.Location = New System.Drawing.Point(129, 88)
-        Me.btn1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btn1.Margin = New System.Windows.Forms.Padding(2)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(25, 26)
         Me.btn1.TabIndex = 34
@@ -155,7 +155,7 @@ Partial Class Main
         'btn2
         '
         Me.btn2.Location = New System.Drawing.Point(129, 118)
-        Me.btn2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btn2.Margin = New System.Windows.Forms.Padding(2)
         Me.btn2.Name = "btn2"
         Me.btn2.Size = New System.Drawing.Size(25, 26)
         Me.btn2.TabIndex = 35
@@ -164,7 +164,7 @@ Partial Class Main
         'btn3
         '
         Me.btn3.Location = New System.Drawing.Point(129, 147)
-        Me.btn3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btn3.Margin = New System.Windows.Forms.Padding(2)
         Me.btn3.Name = "btn3"
         Me.btn3.Size = New System.Drawing.Size(25, 26)
         Me.btn3.TabIndex = 36
@@ -173,7 +173,7 @@ Partial Class Main
         'btn4
         '
         Me.btn4.Location = New System.Drawing.Point(129, 176)
-        Me.btn4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btn4.Margin = New System.Windows.Forms.Padding(2)
         Me.btn4.Name = "btn4"
         Me.btn4.Size = New System.Drawing.Size(25, 26)
         Me.btn4.TabIndex = 37
@@ -182,7 +182,7 @@ Partial Class Main
         'btn5
         '
         Me.btn5.Location = New System.Drawing.Point(129, 205)
-        Me.btn5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btn5.Margin = New System.Windows.Forms.Padding(2)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(25, 26)
         Me.btn5.TabIndex = 38
@@ -300,7 +300,7 @@ Partial Class Main
         '
         'tmrStart
         '
-        Me.tmrStart.Interval = 30000
+        Me.tmrStart.Interval = 60000
         '
         'lblReinforcers
         '
@@ -328,7 +328,7 @@ Partial Class Main
         '
         Me.btnFinish.Enabled = False
         Me.btnFinish.Location = New System.Drawing.Point(6, 234)
-        Me.btnFinish.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnFinish.Margin = New System.Windows.Forms.Padding(2)
         Me.btnFinish.Name = "btnFinish"
         Me.btnFinish.Size = New System.Drawing.Size(148, 25)
         Me.btnFinish.TabIndex = 51
@@ -373,7 +373,7 @@ Partial Class Main
         Me.Controls.Add(Me.lblSession)
         Me.Controls.Add(Me.lblSujeto)
         Me.Controls.Add(Me.lblSesion)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form2"
