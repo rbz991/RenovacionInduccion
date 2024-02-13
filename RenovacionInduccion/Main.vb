@@ -113,7 +113,7 @@ Public Class Main
             RefRdy = False
             RefCount += 1
             WriteLine(1, vTimeNow, 6)
-            Arduino.WriteLine("R")
+            Arduino.WriteLine("P")
             VIGen()
         End If
     End Sub
@@ -157,6 +157,7 @@ Public Class Main
         Arduino.Close()
         FileClose(1)
         btnFinish.Enabled = True
+        btnFinish.BackColor = Color.Red
     End Sub
 
     Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
