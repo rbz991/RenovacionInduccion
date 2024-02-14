@@ -71,7 +71,7 @@ Public Class Main
                 lblResponses4.Text = ResponseCount(3)
                 lblResponses5.Text = ResponseCount(4)
                 lblReinforcers.Text = RefCount
-                If RefCount >= 50 Or lblTime.Text >= 1800 Then SessionOver() 'This sets the criteria to finish the session.
+                If lblTime.Text >= 1800 Then SessionOver() 'This sets the criteria to finish the session.
 
             Catch ex As Exception
             End Try
@@ -110,11 +110,13 @@ Public Class Main
 
     Private Sub Reinforce()
         If RefRdy = True Then
+
             RefRdy = False
             RefCount += 1
             WriteLine(1, vTimeNow, 6)
             Arduino.WriteLine("P")
             VIGen()
+            If RefCount >= 50 Then SessionOver()
         End If
     End Sub
 
