@@ -150,6 +150,15 @@ Public Class Main
     End Sub
 
     Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
+        If btnFinish.BackColor = Color.Red Then
+            End
+        Else
+            WriteLine(1, "Forced exit time: " & (vTimeNow / 1000) / 60)
+            Arduino.WriteLine("hab")
+            Arduino.Close()
+            FileClose(1)
+            End
+        End If
         End
     End Sub
 
@@ -158,7 +167,6 @@ Public Class Main
         Arduino.WriteLine("hab")
         Arduino.Close()
         FileClose(1)
-        btnFinish.Enabled = True
         btnFinish.BackColor = Color.Red
     End Sub
 
