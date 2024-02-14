@@ -43,7 +43,7 @@ Partial Class SetUp
         '
         Me.grpActiveLever.Controls.Add(Me.rdoCenter)
         Me.grpActiveLever.Controls.Add(Me.rdoAll)
-        Me.grpActiveLever.Location = New System.Drawing.Point(13, 144)
+        Me.grpActiveLever.Location = New System.Drawing.Point(39, 144)
         Me.grpActiveLever.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.grpActiveLever.Name = "grpActiveLever"
         Me.grpActiveLever.Padding = New System.Windows.Forms.Padding(2, 1, 2, 1)
@@ -77,7 +77,7 @@ Partial Class SetUp
         'lblSujeto
         '
         Me.lblSujeto.AutoSize = True
-        Me.lblSujeto.Location = New System.Drawing.Point(10, 9)
+        Me.lblSujeto.Location = New System.Drawing.Point(36, 9)
         Me.lblSujeto.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblSujeto.Name = "lblSujeto"
         Me.lblSujeto.Size = New System.Drawing.Size(46, 13)
@@ -87,7 +87,7 @@ Partial Class SetUp
         'lbl
         '
         Me.lbl.AutoSize = True
-        Me.lbl.Location = New System.Drawing.Point(10, 51)
+        Me.lbl.Location = New System.Drawing.Point(36, 54)
         Me.lbl.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lbl.Name = "lbl"
         Me.lbl.Size = New System.Drawing.Size(29, 13)
@@ -96,7 +96,7 @@ Partial Class SetUp
         '
         'btnComenzar
         '
-        Me.btnComenzar.Location = New System.Drawing.Point(13, 214)
+        Me.btnComenzar.Location = New System.Drawing.Point(39, 214)
         Me.btnComenzar.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnComenzar.Name = "btnComenzar"
         Me.btnComenzar.Size = New System.Drawing.Size(106, 65)
@@ -106,7 +106,7 @@ Partial Class SetUp
         '
         'txtSubject
         '
-        Me.txtSubject.Location = New System.Drawing.Point(63, 7)
+        Me.txtSubject.Location = New System.Drawing.Point(89, 7)
         Me.txtSubject.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.txtSubject.Name = "txtSubject"
         Me.txtSubject.Size = New System.Drawing.Size(62, 20)
@@ -116,7 +116,7 @@ Partial Class SetUp
         'lblSesion
         '
         Me.lblSesion.AutoSize = True
-        Me.lblSesion.Location = New System.Drawing.Point(10, 31)
+        Me.lblSesion.Location = New System.Drawing.Point(36, 31)
         Me.lblSesion.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblSesion.Name = "lblSesion"
         Me.lblSesion.Size = New System.Drawing.Size(47, 13)
@@ -125,7 +125,7 @@ Partial Class SetUp
         '
         'txtCOM
         '
-        Me.txtCOM.Location = New System.Drawing.Point(63, 48)
+        Me.txtCOM.Location = New System.Drawing.Point(89, 51)
         Me.txtCOM.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.txtCOM.Name = "txtCOM"
         Me.txtCOM.Size = New System.Drawing.Size(62, 20)
@@ -134,7 +134,7 @@ Partial Class SetUp
         '
         'txtSession
         '
-        Me.txtSession.Location = New System.Drawing.Point(63, 29)
+        Me.txtSession.Location = New System.Drawing.Point(89, 29)
         Me.txtSession.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.txtSession.Name = "txtSession"
         Me.txtSession.Size = New System.Drawing.Size(62, 20)
@@ -145,7 +145,7 @@ Partial Class SetUp
         '
         Me.grpPhase.Controls.Add(Me.rdoReinforcement)
         Me.grpPhase.Controls.Add(Me.rdoExtinction)
-        Me.grpPhase.Location = New System.Drawing.Point(13, 78)
+        Me.grpPhase.Location = New System.Drawing.Point(39, 78)
         Me.grpPhase.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.grpPhase.Name = "grpPhase"
         Me.grpPhase.Padding = New System.Windows.Forms.Padding(2, 1, 2, 1)
@@ -180,7 +180,7 @@ Partial Class SetUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(136, 293)
+        Me.ClientSize = New System.Drawing.Size(184, 291)
         Me.Controls.Add(Me.grpPhase)
         Me.Controls.Add(Me.grpActiveLever)
         Me.Controls.Add(Me.lblSujeto)
