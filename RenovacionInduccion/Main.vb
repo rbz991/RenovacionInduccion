@@ -152,7 +152,7 @@ Public Class Main
     End Sub
 
     Private Sub SessionOver()
-        WriteLine(1, "@")
+        WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
         Arduino.WriteLine("hab")
         Arduino.Close()
         FileClose(1)
