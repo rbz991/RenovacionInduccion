@@ -1,4 +1,6 @@
-﻿Public Class SetUp
+﻿Imports System.Collections.Specialized.BitVector32
+
+Public Class SetUp
     Private Sub rdoReinforcement_CheckedChanged(sender As Object, e As EventArgs) Handles rdoReinforcement.CheckedChanged
         grpActiveLever.Visible = True
     End Sub
@@ -10,28 +12,28 @@
     End Sub
 
     Private Sub btnComenzar_Click(sender As Object, e As EventArgs) Handles btnComenzar.Click
-        Dim Session As New SessionSettings
-        Session.Subject = txtSubject.Text
-        Session.Session = txtSession.Text
-        Session.Port = txtCOM.Text
-        If rdoReinforcement.Checked = True Then Session.Phase = rdoReinforcement.Text
-        If rdoExtinction.Checked = True Then Session.Phase = rdoExtinction.Text
-        If rdoAll.Checked = True Then Session.ActiveLever = rdoAll.Text
-        If rdoCenter.Checked = True Then Session.ActiveLever = rdoCenter.Text
-        If Session.Phase = rdoExtinction.Text Then Session.ActiveLever = "None"
-        FileOpen(1, Session.File(), OpenMode.Append)
-        Session.Heading(1)
 
-        Dim x As New Main
-        x.Show()
-        x.ArduinoVB()
-    End Sub
+        FileOpen(1, "G:\Mi unidad\Datoz\InducciónVar\" & txtSubject.Text & "_" & txtSession.Text & "_" & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt", OpenMode.Append)
+        WriteLine(1, "Subject: " & txtSubject.Text)
+        WriteLine(1, "Session: " & txtSession.Text)
+        WriteLine(1, "COM Port: " & txtCOM.Text)
+        WriteLine(1, "Date: " & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss"))
+        WriteLine(1, "Lever 1 response: 1")
+        WriteLine(1, "Lever 2 response: 2")
+        WriteLine(1, "Lever 3 response: 3")
+        WriteLine(1, "Lever 4 response: 4")
+        WriteLine(1, "Lever 5 response: 5")
+        WriteLine(1, "Reinforcer: 6")
+        WriteLine(1, "*")
 
-    Private Sub rdoAll_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAll.CheckedChanged
-
-    End Sub
-
-    Private Sub rdoCenter_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCenter.CheckedChanged
+        If CheckBox1.Checked = True Then
+            Dim x As New MainH
+            x.Show()
+        ElseIf CheckBox1.Checked = False Then
+            Dim x As New Main
+            x.Show()
+            x.ArduinoVB()
+        End If
 
     End Sub
 End Class
