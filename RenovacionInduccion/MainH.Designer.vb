@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainH
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,9 @@ Partial Class MainH
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -34,6 +35,9 @@ Partial Class MainH
         Me.lblPreview3 = New System.Windows.Forms.Label()
         Me.lblPreview2 = New System.Windows.Forms.Label()
         Me.lblPreview1 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.tmrHoldUp = New System.Windows.Forms.Timer(Me.components)
+        Me.btnStim = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -168,11 +172,34 @@ Partial Class MainH
         Me.lblPreview1.Size = New System.Drawing.Size(0, 55)
         Me.lblPreview1.TabIndex = 8
         '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(678, 114)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 23)
+        Me.Button5.TabIndex = 12
+        Me.Button5.Text = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'tmrHoldUp
+        '
+        Me.tmrHoldUp.Interval = 1000
+        '
+        'btnStim
+        '
+        Me.btnStim.Location = New System.Drawing.Point(378, 49)
+        Me.btnStim.Name = "btnStim"
+        Me.btnStim.Size = New System.Drawing.Size(75, 38)
+        Me.btnStim.TabIndex = 13
+        Me.btnStim.UseVisualStyleBackColor = True
+        '
         'MainH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.btnStim)
+        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.lblPreview4)
         Me.Controls.Add(Me.lblPreview3)
         Me.Controls.Add(Me.lblPreview2)
@@ -187,7 +214,6 @@ Partial Class MainH
         Me.Controls.Add(Me.Button1)
         Me.Name = "MainH"
         Me.Text = "Form1"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -205,4 +231,7 @@ Partial Class MainH
     Friend WithEvents lblPreview3 As Label
     Friend WithEvents lblPreview2 As Label
     Friend WithEvents lblPreview1 As Label
+    Friend WithEvents Button5 As Button
+    Friend WithEvents tmrHoldUp As Timer
+    Friend WithEvents btnStim As Button
 End Class
