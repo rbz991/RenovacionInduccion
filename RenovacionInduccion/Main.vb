@@ -121,7 +121,7 @@ Public Class Main
     End Sub
 
     Private Sub VIGen()
-        Dim v = 1
+
         Dim n = 10 'This value represents the VI iterations. 
         Dim rd(n)
         Dim vi(n)

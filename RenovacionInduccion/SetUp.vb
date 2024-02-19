@@ -12,7 +12,7 @@ Public Class SetUp
     End Sub
 
     Private Sub btnComenzar_Click(sender As Object, e As EventArgs) Handles btnComenzar.Click
-
+        v = txtIV.Text
         FileOpen(1, "G:\Mi unidad\Datoz\InducciónVar\" & txtSubject.Text & "_" & txtSession.Text & "_" & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt", OpenMode.Append)
         WriteLine(1, "Subject: " & txtSubject.Text)
         WriteLine(1, "Session: " & txtSession.Text)

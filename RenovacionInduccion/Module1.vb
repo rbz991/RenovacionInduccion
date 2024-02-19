@@ -1,4 +1,5 @@
 ﻿Module Module1
+    Public v = 1
     Public Actual_Response(4) As String
     Public Previous_Response(4) As String
     Public ResponseCount(4) As Integer

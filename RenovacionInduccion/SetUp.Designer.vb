@@ -36,6 +36,8 @@ Partial Class SetUp
         Me.rdoReinforcement = New System.Windows.Forms.RadioButton()
         Me.rdoExtinction = New System.Windows.Forms.RadioButton()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtIV = New System.Windows.Forms.TextBox()
         Me.grpActiveLever.SuspendLayout()
         Me.grpPhase.SuspendLayout()
         Me.SuspendLayout()
@@ -44,7 +46,7 @@ Partial Class SetUp
         '
         Me.grpActiveLever.Controls.Add(Me.rdoCenter)
         Me.grpActiveLever.Controls.Add(Me.rdoAll)
-        Me.grpActiveLever.Location = New System.Drawing.Point(78, 277)
+        Me.grpActiveLever.Location = New System.Drawing.Point(78, 311)
         Me.grpActiveLever.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.grpActiveLever.Name = "grpActiveLever"
         Me.grpActiveLever.Padding = New System.Windows.Forms.Padding(4, 2, 4, 2)
@@ -88,7 +90,7 @@ Partial Class SetUp
         'lbl
         '
         Me.lbl.AutoSize = True
-        Me.lbl.Location = New System.Drawing.Point(72, 104)
+        Me.lbl.Location = New System.Drawing.Point(72, 124)
         Me.lbl.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl.Name = "lbl"
         Me.lbl.Size = New System.Drawing.Size(57, 25)
@@ -97,7 +99,7 @@ Partial Class SetUp
         '
         'btnComenzar
         '
-        Me.btnComenzar.Location = New System.Drawing.Point(78, 449)
+        Me.btnComenzar.Location = New System.Drawing.Point(78, 483)
         Me.btnComenzar.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.btnComenzar.Name = "btnComenzar"
         Me.btnComenzar.Size = New System.Drawing.Size(212, 88)
@@ -117,7 +119,7 @@ Partial Class SetUp
         'lblSesion
         '
         Me.lblSesion.AutoSize = True
-        Me.lblSesion.Location = New System.Drawing.Point(72, 60)
+        Me.lblSesion.Location = New System.Drawing.Point(72, 52)
         Me.lblSesion.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSesion.Name = "lblSesion"
         Me.lblSesion.Size = New System.Drawing.Size(95, 25)
@@ -126,7 +128,7 @@ Partial Class SetUp
         '
         'txtCOM
         '
-        Me.txtCOM.Location = New System.Drawing.Point(178, 98)
+        Me.txtCOM.Location = New System.Drawing.Point(178, 118)
         Me.txtCOM.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.txtCOM.Name = "txtCOM"
         Me.txtCOM.Size = New System.Drawing.Size(120, 31)
@@ -135,7 +137,7 @@ Partial Class SetUp
         '
         'txtSession
         '
-        Me.txtSession.Location = New System.Drawing.Point(178, 56)
+        Me.txtSession.Location = New System.Drawing.Point(178, 48)
         Me.txtSession.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.txtSession.Name = "txtSession"
         Me.txtSession.Size = New System.Drawing.Size(120, 31)
@@ -146,7 +148,7 @@ Partial Class SetUp
         '
         Me.grpPhase.Controls.Add(Me.rdoReinforcement)
         Me.grpPhase.Controls.Add(Me.rdoExtinction)
-        Me.grpPhase.Location = New System.Drawing.Point(78, 150)
+        Me.grpPhase.Location = New System.Drawing.Point(78, 184)
         Me.grpPhase.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.grpPhase.Name = "grpPhase"
         Me.grpPhase.Padding = New System.Windows.Forms.Padding(4, 2, 4, 2)
@@ -180,18 +182,39 @@ Partial Class SetUp
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(86, 415)
+        Me.CheckBox1.Location = New System.Drawing.Point(86, 449)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(112, 29)
         Me.CheckBox1.TabIndex = 28
         Me.CheckBox1.Text = "Human"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(72, 89)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(37, 25)
+        Me.Label1.TabIndex = 30
+        Me.Label1.Text = "IV:"
+        '
+        'txtIV
+        '
+        Me.txtIV.Location = New System.Drawing.Point(178, 83)
+        Me.txtIV.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.txtIV.Name = "txtIV"
+        Me.txtIV.Size = New System.Drawing.Size(120, 31)
+        Me.txtIV.TabIndex = 29
+        Me.txtIV.Text = "1"
+        '
         'SetUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(464, 560)
+        Me.ClientSize = New System.Drawing.Size(464, 616)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtIV)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.grpPhase)
         Me.Controls.Add(Me.grpActiveLever)
@@ -202,7 +225,7 @@ Partial Class SetUp
         Me.Controls.Add(Me.lblSesion)
         Me.Controls.Add(Me.txtCOM)
         Me.Controls.Add(Me.txtSession)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SetUp"
         Me.Text = "Form1"
         Me.grpActiveLever.ResumeLayout(False)
@@ -227,4 +250,6 @@ Partial Class SetUp
     Friend WithEvents rdoReinforcement As RadioButton
     Friend WithEvents rdoExtinction As RadioButton
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtIV As TextBox
 End Class
