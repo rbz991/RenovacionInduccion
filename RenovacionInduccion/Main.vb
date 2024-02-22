@@ -164,11 +164,14 @@ Public Class Main
     End Sub
 
     Private Sub SessionOver()
-        WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
-        Arduino.WriteLine("hab")
-        Arduino.Close()
-        FileClose(1)
-        btnFinish.BackColor = Color.Red
+        Try
+            WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
+            Arduino.WriteLine("hab")
+            Arduino.Close()
+            FileClose(1)
+            btnFinish.BackColor = Color.Red
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick

@@ -46,11 +46,11 @@ Partial Class SetUp
         '
         Me.grpActiveLever.Controls.Add(Me.rdoCenter)
         Me.grpActiveLever.Controls.Add(Me.rdoAll)
-        Me.grpActiveLever.Location = New System.Drawing.Point(78, 311)
-        Me.grpActiveLever.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.grpActiveLever.Location = New System.Drawing.Point(39, 162)
+        Me.grpActiveLever.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.grpActiveLever.Name = "grpActiveLever"
-        Me.grpActiveLever.Padding = New System.Windows.Forms.Padding(4, 2, 4, 2)
-        Me.grpActiveLever.Size = New System.Drawing.Size(212, 123)
+        Me.grpActiveLever.Padding = New System.Windows.Forms.Padding(2, 1, 2, 1)
+        Me.grpActiveLever.Size = New System.Drawing.Size(106, 64)
         Me.grpActiveLever.TabIndex = 24
         Me.grpActiveLever.TabStop = False
         Me.grpActiveLever.Text = "Active Lever"
@@ -58,10 +58,10 @@ Partial Class SetUp
         'rdoCenter
         '
         Me.rdoCenter.AutoSize = True
-        Me.rdoCenter.Location = New System.Drawing.Point(8, 75)
-        Me.rdoCenter.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.rdoCenter.Location = New System.Drawing.Point(4, 39)
+        Me.rdoCenter.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.rdoCenter.Name = "rdoCenter"
-        Me.rdoCenter.Size = New System.Drawing.Size(107, 29)
+        Me.rdoCenter.Size = New System.Drawing.Size(56, 17)
         Me.rdoCenter.TabIndex = 7
         Me.rdoCenter.Text = "Center"
         Me.rdoCenter.UseVisualStyleBackColor = True
@@ -69,10 +69,10 @@ Partial Class SetUp
         'rdoAll
         '
         Me.rdoAll.AutoSize = True
-        Me.rdoAll.Location = New System.Drawing.Point(8, 42)
-        Me.rdoAll.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.rdoAll.Location = New System.Drawing.Point(4, 22)
+        Me.rdoAll.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.rdoAll.Name = "rdoAll"
-        Me.rdoAll.Size = New System.Drawing.Size(67, 29)
+        Me.rdoAll.Size = New System.Drawing.Size(36, 17)
         Me.rdoAll.TabIndex = 8
         Me.rdoAll.Text = "All"
         Me.rdoAll.UseVisualStyleBackColor = True
@@ -80,67 +80,67 @@ Partial Class SetUp
         'lblSujeto
         '
         Me.lblSujeto.AutoSize = True
-        Me.lblSujeto.Location = New System.Drawing.Point(72, 17)
-        Me.lblSujeto.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSujeto.Location = New System.Drawing.Point(36, 9)
+        Me.lblSujeto.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblSujeto.Name = "lblSujeto"
-        Me.lblSujeto.Size = New System.Drawing.Size(90, 25)
+        Me.lblSujeto.Size = New System.Drawing.Size(46, 13)
         Me.lblSujeto.TabIndex = 21
         Me.lblSujeto.Text = "Subject:"
         '
         'lbl
         '
         Me.lbl.AutoSize = True
-        Me.lbl.Location = New System.Drawing.Point(72, 124)
-        Me.lbl.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl.Location = New System.Drawing.Point(36, 64)
+        Me.lbl.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lbl.Name = "lbl"
-        Me.lbl.Size = New System.Drawing.Size(57, 25)
+        Me.lbl.Size = New System.Drawing.Size(29, 13)
         Me.lbl.TabIndex = 23
         Me.lbl.Text = "Port:"
         '
         'btnComenzar
         '
-        Me.btnComenzar.Location = New System.Drawing.Point(78, 483)
-        Me.btnComenzar.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.btnComenzar.Location = New System.Drawing.Point(39, 251)
+        Me.btnComenzar.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnComenzar.Name = "btnComenzar"
-        Me.btnComenzar.Size = New System.Drawing.Size(212, 88)
+        Me.btnComenzar.Size = New System.Drawing.Size(106, 46)
         Me.btnComenzar.TabIndex = 17
         Me.btnComenzar.Text = "Start"
         Me.btnComenzar.UseVisualStyleBackColor = True
         '
         'txtSubject
         '
-        Me.txtSubject.Location = New System.Drawing.Point(178, 13)
-        Me.txtSubject.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.txtSubject.Location = New System.Drawing.Point(89, 7)
+        Me.txtSubject.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.txtSubject.Name = "txtSubject"
-        Me.txtSubject.Size = New System.Drawing.Size(120, 31)
+        Me.txtSubject.Size = New System.Drawing.Size(62, 20)
         Me.txtSubject.TabIndex = 18
         Me.txtSubject.Text = "BG"
         '
         'lblSesion
         '
         Me.lblSesion.AutoSize = True
-        Me.lblSesion.Location = New System.Drawing.Point(72, 52)
-        Me.lblSesion.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSesion.Location = New System.Drawing.Point(36, 27)
+        Me.lblSesion.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblSesion.Name = "lblSesion"
-        Me.lblSesion.Size = New System.Drawing.Size(95, 25)
+        Me.lblSesion.Size = New System.Drawing.Size(47, 13)
         Me.lblSesion.TabIndex = 22
         Me.lblSesion.Text = "Session:"
         '
         'txtCOM
         '
-        Me.txtCOM.Location = New System.Drawing.Point(178, 118)
-        Me.txtCOM.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.txtCOM.Location = New System.Drawing.Point(89, 61)
+        Me.txtCOM.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.txtCOM.Name = "txtCOM"
-        Me.txtCOM.Size = New System.Drawing.Size(120, 31)
+        Me.txtCOM.Size = New System.Drawing.Size(62, 20)
         Me.txtCOM.TabIndex = 20
         Me.txtCOM.Text = "COM1"
         '
         'txtSession
         '
-        Me.txtSession.Location = New System.Drawing.Point(178, 48)
-        Me.txtSession.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.txtSession.Location = New System.Drawing.Point(89, 25)
+        Me.txtSession.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.txtSession.Name = "txtSession"
-        Me.txtSession.Size = New System.Drawing.Size(120, 31)
+        Me.txtSession.Size = New System.Drawing.Size(62, 20)
         Me.txtSession.TabIndex = 19
         Me.txtSession.Text = "1"
         '
@@ -148,11 +148,11 @@ Partial Class SetUp
         '
         Me.grpPhase.Controls.Add(Me.rdoReinforcement)
         Me.grpPhase.Controls.Add(Me.rdoExtinction)
-        Me.grpPhase.Location = New System.Drawing.Point(78, 184)
-        Me.grpPhase.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.grpPhase.Location = New System.Drawing.Point(39, 96)
+        Me.grpPhase.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.grpPhase.Name = "grpPhase"
-        Me.grpPhase.Padding = New System.Windows.Forms.Padding(4, 2, 4, 2)
-        Me.grpPhase.Size = New System.Drawing.Size(212, 123)
+        Me.grpPhase.Padding = New System.Windows.Forms.Padding(2, 1, 2, 1)
+        Me.grpPhase.Size = New System.Drawing.Size(106, 64)
         Me.grpPhase.TabIndex = 27
         Me.grpPhase.TabStop = False
         Me.grpPhase.Text = "Phase"
@@ -160,10 +160,10 @@ Partial Class SetUp
         'rdoReinforcement
         '
         Me.rdoReinforcement.AutoSize = True
-        Me.rdoReinforcement.Location = New System.Drawing.Point(8, 38)
-        Me.rdoReinforcement.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.rdoReinforcement.Location = New System.Drawing.Point(4, 20)
+        Me.rdoReinforcement.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.rdoReinforcement.Name = "rdoReinforcement"
-        Me.rdoReinforcement.Size = New System.Drawing.Size(182, 29)
+        Me.rdoReinforcement.Size = New System.Drawing.Size(94, 17)
         Me.rdoReinforcement.TabIndex = 7
         Me.rdoReinforcement.Text = "Reinforcement"
         Me.rdoReinforcement.UseVisualStyleBackColor = True
@@ -171,10 +171,10 @@ Partial Class SetUp
         'rdoExtinction
         '
         Me.rdoExtinction.AutoSize = True
-        Me.rdoExtinction.Location = New System.Drawing.Point(8, 71)
-        Me.rdoExtinction.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.rdoExtinction.Location = New System.Drawing.Point(4, 37)
+        Me.rdoExtinction.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.rdoExtinction.Name = "rdoExtinction"
-        Me.rdoExtinction.Size = New System.Drawing.Size(137, 29)
+        Me.rdoExtinction.Size = New System.Drawing.Size(71, 17)
         Me.rdoExtinction.TabIndex = 8
         Me.rdoExtinction.Text = "Extinction"
         Me.rdoExtinction.UseVisualStyleBackColor = True
@@ -182,9 +182,10 @@ Partial Class SetUp
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(86, 449)
+        Me.CheckBox1.Location = New System.Drawing.Point(43, 233)
+        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(112, 29)
+        Me.CheckBox1.Size = New System.Drawing.Size(60, 17)
         Me.CheckBox1.TabIndex = 28
         Me.CheckBox1.Text = "Human"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -192,27 +193,27 @@ Partial Class SetUp
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(72, 89)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(36, 46)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(37, 25)
+        Me.Label1.Size = New System.Drawing.Size(20, 13)
         Me.Label1.TabIndex = 30
         Me.Label1.Text = "IV:"
         '
         'txtIV
         '
-        Me.txtIV.Location = New System.Drawing.Point(178, 83)
-        Me.txtIV.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.txtIV.Location = New System.Drawing.Point(89, 43)
+        Me.txtIV.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.txtIV.Name = "txtIV"
-        Me.txtIV.Size = New System.Drawing.Size(120, 31)
+        Me.txtIV.Size = New System.Drawing.Size(62, 20)
         Me.txtIV.TabIndex = 29
         Me.txtIV.Text = "1"
         '
         'SetUp
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(464, 616)
+        Me.ClientSize = New System.Drawing.Size(185, 320)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtIV)
         Me.Controls.Add(Me.CheckBox1)
@@ -225,7 +226,7 @@ Partial Class SetUp
         Me.Controls.Add(Me.lblSesion)
         Me.Controls.Add(Me.txtCOM)
         Me.Controls.Add(Me.txtSession)
-        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "SetUp"
         Me.Text = "Form1"
         Me.grpActiveLever.ResumeLayout(False)
