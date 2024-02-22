@@ -70,6 +70,7 @@ Public Class Main
                 lblResponses3.Text = ResponseCount(2)
                 lblResponses4.Text = ResponseCount(3)
                 lblResponses5.Text = ResponseCount(4)
+                lblIV.Text = v
                 lblReinforcers.Text = RefCount
                 If lblTime.Text >= 1800 Then SessionOver() 'This sets the criteria to finish the session.
 
