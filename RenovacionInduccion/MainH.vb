@@ -10,44 +10,45 @@ Public Class MainH
     Public blnRatRotation = False
     Public ratJumpCounter As Integer = 0
     Public blnRatJump As Boolean = False
-    Private Sub Button_Click(sender As Object, e As EventArgs)
-        SelectedNumber = SelectedNumber & sender.Text
-        LagFailed = False
-        Dim lbls() As Control = Controls.Find("lblPreview" & LabelIndex, True)
-        Dim lbl As Label = lbls(0)
-        lbl.Text = sender.Text
-        If Len(SelectedNumber) < 5 Then
-            LabelIndex += 1
-            If LabelIndex >= 5 Then
-                tmrHoldUp.Enabled = True
-                'Button1.Enabled = False
-                'Button2.Enabled = False
-                'Button3.Enabled = False
-                'Button4.Enabled = False
-                For i = 0 To SequenceIndex
-                    If SelectedNumber = PerformedSequences(i) Then
-                        LagFailed = True
-                    End If
-                Next
-                If LagFailed = False Then Reinforce()
-                'If LagFailed = True Then Failed()
-                PerformedSequences(SequenceIndex) = SelectedNumber
-                WriteLine(1, SelectedNumber)
-            End If
-        End If
-        If SequenceIndex >= 50 Then
-            End
-        End If
-    End Sub
-    Private Sub Sequenceready()
-        SelectedNumber = ""
-        'lblPreview1.Text = ""
-        'lblPreview2.Text = ""
-        'lblPreview3.Text = ""
-        'lblPreview4.Text = ""
-        SequenceIndex += 1
-        LabelIndex = 1
-    End Sub
+    Public currentComponent As Byte = 0
+    'Private Sub Button_Click(sender As Object, e As EventArgs)
+    '    SelectedNumber = SelectedNumber & sender.Text
+    '    LagFailed = False
+    '    Dim lbls() As Control = Controls.Find("lblPreview" & LabelIndex, True)
+    '    Dim lbl As Label = lbls(0)
+    '    lbl.Text = sender.Text
+    '    If Len(SelectedNumber) < 5 Then
+    '        LabelIndex += 1
+    '        If LabelIndex >= 5 Then
+    '            tmrHoldUp.Enabled = True
+    '            'Button1.Enabled = False
+    '            'Button2.Enabled = False
+    '            'Button3.Enabled = False
+    '            'Button4.Enabled = False
+    '            For i = 0 To SequenceIndex
+    '                If SelectedNumber = PerformedSequences(i) Then
+    '                    LagFailed = True
+    '                End If
+    '            Next
+    '            If LagFailed = False Then Reinforce()
+    '            'If LagFailed = True Then Failed()
+    '            PerformedSequences(SequenceIndex) = SelectedNumber
+    '            WriteLine(1, SelectedNumber)
+    '        End If
+    '    End If
+    '    If SequenceIndex >= 50 Then
+    '        End
+    '    End If
+    'End Sub
+    'Private Sub Sequenceready()
+    '    SelectedNumber = ""
+    '    'lblPreview1.Text = ""
+    '    'lblPreview2.Text = ""
+    '    'lblPreview3.Text = ""
+    '    'lblPreview4.Text = ""
+    '    SequenceIndex += 1
+    '    LabelIndex = 1
+    'End Sub
 
 
 
@@ -56,15 +57,15 @@ Public Class MainH
         FileOpen(1, "G:\My Drive\Datoz\InducciónVar\TEST.txt", OpenMode.Append)
     End Sub
 
-    Private Sub tmrHoldUp_Tick(sender As Object, e As EventArgs) Handles tmrHoldUp.Tick
-        Sequenceready()
-        tmrHoldUp.Enabled = False
-        'Button1.Enabled = True
-        'Button2.Enabled = True
-        'Button3.Enabled = True
-        'Button4.Enabled = True
-        'btnStim.Text = ""
-    End Sub
+    'Private Sub tmrHoldUp_Tick(sender As Object, e As EventArgs) Handles tmrHoldUp.Tick
+    '    Sequenceready()
+    '    tmrHoldUp.Enabled = False
+    '    'Button1.Enabled = True
+    '    'Button2.Enabled = True
+    '    'Button3.Enabled = True
+    '    'Button4.Enabled = True
+    '    'btnStim.Text = ""
+    'End Sub
 
 
 
@@ -87,7 +88,7 @@ Public Class MainH
         Arduino = New SerialPort(SetUp.txtCOM.Text, 9600) 'Assigns the Arduino to the selected port at a 9600 baud rate. 
         Arduino.Open() 'Starts the Arduino-VB communication.
         tmrStart.Enabled = True
-        Arduino.WriteLine("abh")
+        'Arduino.WriteLine("abh")
         Me.Text = SetUp.txtCOM.Text
 
 
@@ -146,22 +147,24 @@ Public Class MainH
         Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
             tmrStart.Enabled = False
             vTimeStart = Environment.TickCount
+        currentComponent += 1
 
 
     End Sub
 
         Private Sub Response(x As Byte)
             If tmrStart.Enabled = False Then
-                If SetUp.rdoAll.Checked = True Then
-                RatMove()
+            If SetUp.rdoAll.Checked = True Then
+                RatJump()
+
                 ResponseCount(x - 1) += 1
                 WriteLine(1, vTimeNow, x)
-                    If RefRdy = True Then Reinforce()
-                ElseIf SetUp.rdoCenter.Checked = True Then
-                    ResponseCount(x - 1) += 1
+                If RefRdy = True Then Reinforce()
+            ElseIf SetUp.rdoCenter.Checked = True Then
+                ResponseCount(x - 1) += 1
                     WriteLine(1, vTimeNow, x)
                     If x = 3 Then
-                    RatMove()
+                    RatJump()
                     If RefRdy = True Then Reinforce()
                 End If
                 End If
@@ -175,10 +178,10 @@ Public Class MainH
                 RefRdy = False
                 RefCount += 1
                 WriteLine(1, vTimeNow, 6)
-                Arduino.WriteLine("P")
-                VIGen()
-                If RefCount >= 50 Then SessionOver()
-            End If
+            'Arduino.WriteLine("P")
+            VIGen()
+
+        End If
         End Sub
 
         Private Sub VIGen()
@@ -226,8 +229,8 @@ Public Class MainH
     Private Sub SessionOver()
             Try
                 WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
-                Arduino.WriteLine("hab")
-                Arduino.Close()
+            'Arduino.WriteLine("hab")
+            Arduino.Close()
                 FileClose(1)
             ' btnFinish.BackColor = Color.Red
         Catch ex As Exception
@@ -251,12 +254,14 @@ Public Class MainH
             pctRat.ImageLocation = "C:\Users\rbz99\Source\Repos\rbz991\RenovacionInduccion\RenovacionInduccion\Resources\rat.gif"
             BackgroundImage = My.Resources.fondoCalle
         End If
-        RatJump()
+
     End Sub
 
     Private Sub RatJump()
+        If tmrRatJump.Enabled = False Then
+            tmrRatJump.Enabled = True
+        End If
 
-        tmrRatJump.Enabled = True
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -276,6 +281,22 @@ Public Class MainH
             ratJumpCounter += 1
             If ratJumpCounter = 5 Then blnRatJump = True
         End If
+    End Sub
+
+    Private Sub tmrComponent_Tick(sender As Object, e As EventArgs) Handles tmrComponent.Tick
+
+        If currentComponent = 1 Then
+            currentComponent += 1
+            RatMove()
+        ElseIf currentComponent = 2 Then
+            currentComponent += 1
+            RatMove()
+        ElseIf currentComponent = 3 Then
+            SessionOver()
+            End
+        End If
+
+
     End Sub
 End Class
 

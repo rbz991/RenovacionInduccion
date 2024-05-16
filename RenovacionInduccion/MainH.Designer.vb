@@ -31,6 +31,7 @@ Partial Class MainH
         Me.pctRat = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.tmrRatJump = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrComponent = New System.Windows.Forms.Timer(Me.components)
         CType(Me.pctRat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -69,7 +70,7 @@ Partial Class MainH
         Me.pctRat.BackColor = System.Drawing.Color.Transparent
         Me.pctRat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pctRat.Image = Global.RenovacionInduccion.My.Resources.Resources.rat
-        Me.pctRat.Location = New System.Drawing.Point(245, 153)
+        Me.pctRat.Location = New System.Drawing.Point(534, 274)
         Me.pctRat.Margin = New System.Windows.Forms.Padding(2)
         Me.pctRat.Name = "pctRat"
         Me.pctRat.Size = New System.Drawing.Size(149, 84)
@@ -90,6 +91,11 @@ Partial Class MainH
         'tmrRatJump
         '
         Me.tmrRatJump.Interval = 5
+        '
+        'tmrComponent
+        '
+        Me.tmrComponent.Enabled = True
+        Me.tmrComponent.Interval = 5000
         '
         'MainH
         '
@@ -119,4 +125,5 @@ Partial Class MainH
     Friend WithEvents tmrVI As Timer
     Friend WithEvents Button1 As Button
     Friend WithEvents tmrRatJump As Timer
+    Friend WithEvents tmrComponent As Timer
 End Class

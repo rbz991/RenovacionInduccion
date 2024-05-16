@@ -13,7 +13,7 @@ Public Class SetUp
 
     Private Sub btnComenzar_Click(sender As Object, e As EventArgs) Handles btnComenzar.Click
         v = txtIV.Text
-        FileOpen(1, "G:\Mi unidad\Datoz\InducciónVar\" & txtSubject.Text & "_" & txtSession.Text & "_" & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt", OpenMode.Append)
+        FileOpen(1, "C:\Data\" & txtSubject.Text & "_" & txtSession.Text & "_" & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt", OpenMode.Append)
         WriteLine(1, "Subject: " & txtSubject.Text)
         WriteLine(1, "Session: " & txtSession.Text)
         WriteLine(1, "COM Port: " & txtCOM.Text)
@@ -29,6 +29,7 @@ Public Class SetUp
         If CheckBox1.Checked = True Then
             Dim x As New MainH
             x.Show()
+            x.ArduinoVB()
         ElseIf CheckBox1.Checked = False Then
             Dim x As New Main
             x.Show()
