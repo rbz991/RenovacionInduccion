@@ -139,5 +139,20 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rat.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rat_rotated.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondoCalle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\noche.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondoCalle_noche.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
