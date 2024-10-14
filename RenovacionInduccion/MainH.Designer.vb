@@ -23,7 +23,6 @@ Partial Class MainH
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.tmrHoldUp = New System.Windows.Forms.Timer(Me.components)
         Me.tmrStart = New System.Windows.Forms.Timer(Me.components)
         Me.lblReforzadores = New System.Windows.Forms.Label()
@@ -32,18 +31,9 @@ Partial Class MainH
         Me.Button1 = New System.Windows.Forms.Button()
         Me.tmrRatJump = New System.Windows.Forms.Timer(Me.components)
         Me.tmrComponent = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrBin = New System.Windows.Forms.Timer(Me.components)
         CType(Me.pctRat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(348, 6)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(46, 22)
-        Me.Button5.TabIndex = 12
-        Me.Button5.Text = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
         '
         'tmrHoldUp
         '
@@ -70,7 +60,7 @@ Partial Class MainH
         Me.pctRat.BackColor = System.Drawing.Color.Transparent
         Me.pctRat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pctRat.Image = Global.RenovacionInduccion.My.Resources.Resources.rat
-        Me.pctRat.Location = New System.Drawing.Point(534, 274)
+        Me.pctRat.Location = New System.Drawing.Point(245, 185)
         Me.pctRat.Margin = New System.Windows.Forms.Padding(2)
         Me.pctRat.Name = "pctRat"
         Me.pctRat.Size = New System.Drawing.Size(149, 84)
@@ -83,7 +73,7 @@ Partial Class MainH
         Me.Button1.Location = New System.Drawing.Point(76, 185)
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(38, 12)
+        Me.Button1.Size = New System.Drawing.Size(100, 84)
         Me.Button1.TabIndex = 15
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
@@ -95,7 +85,12 @@ Partial Class MainH
         'tmrComponent
         '
         Me.tmrComponent.Enabled = True
-        Me.tmrComponent.Interval = 5000
+        Me.tmrComponent.Interval = 180000
+        '
+        'tmrBin
+        '
+        Me.tmrBin.Enabled = True
+        Me.tmrBin.Interval = 15000
         '
         'MainH
         '
@@ -107,7 +102,6 @@ Partial Class MainH
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblReforzadores)
         Me.Controls.Add(Me.pctRat)
-        Me.Controls.Add(Me.Button5)
         Me.DoubleBuffered = True
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "MainH"
@@ -117,7 +111,6 @@ Partial Class MainH
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Button5 As Button
     Friend WithEvents tmrHoldUp As Timer
     Friend WithEvents pctRat As PictureBox
     Friend WithEvents tmrStart As Timer
@@ -126,4 +119,5 @@ Partial Class MainH
     Friend WithEvents Button1 As Button
     Friend WithEvents tmrRatJump As Timer
     Friend WithEvents tmrComponent As Timer
+    Friend WithEvents tmrBin As Timer
 End Class

@@ -11,6 +11,10 @@ Public Class MainH
     Public ratJumpCounter As Integer = 0
     Public blnRatJump As Boolean = False
     Public currentComponent As Byte = 0
+    Public bins(2, 11) As Integer
+    Public binCounter As Integer = 0
+    Public rateByPhase(2) As Integer
+
     'Private Sub Button_Click(sender As Object, e As EventArgs)
     '    SelectedNumber = SelectedNumber & sender.Text
     '    LagFailed = False
@@ -53,9 +57,6 @@ Public Class MainH
 
 
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        FileOpen(1, "G:\My Drive\Datoz\InducciónVar\TEST.txt", OpenMode.Append)
-    End Sub
 
     'Private Sub tmrHoldUp_Tick(sender As Object, e As EventArgs) Handles tmrHoldUp.Tick
     '    Sequenceready()
@@ -158,6 +159,9 @@ Public Class MainH
                 RatJump()
 
                 ResponseCount(x - 1) += 1
+
+                bins(currentComponent - 1, binCounter) += 1
+
                 WriteLine(1, vTimeNow, x)
                 If RefRdy = True Then Reinforce()
             ElseIf SetUp.rdoCenter.Checked = True Then
@@ -227,14 +231,16 @@ Public Class MainH
     'End Sub
 
     Private Sub SessionOver()
-            Try
-                WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
+        Try
+            'Preparar un resumen de los datos como preanalisis
+
+            WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
             'Arduino.WriteLine("hab")
             Arduino.Close()
-                FileClose(1)
+            FileClose(1)
             ' btnFinish.BackColor = Color.Red
         Catch ex As Exception
-            End Try
+        End Try
         End Sub
 
         Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
@@ -264,9 +270,7 @@ Public Class MainH
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        RatMove()
-    End Sub
+
 
     Private Sub tmrRatJump_Tick(sender As Object, e As EventArgs) Handles tmrRatJump.Tick
         If blnRatJump = True Then
@@ -288,6 +292,17 @@ Public Class MainH
         If currentComponent = 1 Then
             currentComponent += 1
             RatMove()
+            Dim f As Integer = 0
+            For i = 0 To 11
+                f += bins(0, i)
+            Next
+            rateByPhase(0) = f / 3
+            'calcular la tasa de respuestas en cada bin  de extinción
+            'si tenemos 2 bins seguidos con menos del 80% des respuestas pasa a F3
+
+
+            'calcular la duiracion del componente 2
+            'cambiar a duración del componente 2
         ElseIf currentComponent = 2 Then
             currentComponent += 1
             RatMove()
@@ -297,6 +312,10 @@ Public Class MainH
         End If
 
 
+    End Sub
+
+    Private Sub tmrBin_Tick(sender As Object, e As EventArgs) Handles tmrBin.Tick
+        binCounter += 1
     End Sub
 End Class
 

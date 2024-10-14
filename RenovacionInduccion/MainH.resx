@@ -124,12 +124,15 @@
     <value>212, 17</value>
   </metadata>
   <metadata name="tmrVI.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>363, 17</value>
+    <value>483, 28</value>
   </metadata>
   <metadata name="tmrRatJump.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>461, 20</value>
+    <value>580, 25</value>
   </metadata>
   <metadata name="tmrComponent.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>290, 11</value>
+    <value>307, 25</value>
+  </metadata>
+  <metadata name="tmrBin.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>805, 21</value>
   </metadata>
 </root>

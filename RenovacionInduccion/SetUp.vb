@@ -25,7 +25,7 @@ Public Class SetUp
         WriteLine(1, "Lever 5 response: 5")
         WriteLine(1, "Reinforcer: 6")
         WriteLine(1, "*")
-
+        ' FileOpen(1, "G:\My Drive\Datoz\InducciónVar\TEST.txt", OpenMode.Append)
         If CheckBox1.Checked = True Then
             Dim x As New MainH
             x.Show()
