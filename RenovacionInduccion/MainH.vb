@@ -11,94 +11,31 @@ Public Class MainH
     Public ratJumpCounter As Integer = 0
     Public blnRatJump As Boolean = False
     Public currentComponent As Byte = 0
-    Public bins(2, 11) As Integer
+    Public responsesByBin(39) As Integer
     Public binCounter As Integer = 0
     Public rateByPhase(2) As Integer
-
-    'Private Sub Button_Click(sender As Object, e As EventArgs)
-    '    SelectedNumber = SelectedNumber & sender.Text
-    '    LagFailed = False
-    '    Dim lbls() As Control = Controls.Find("lblPreview" & LabelIndex, True)
-    '    Dim lbl As Label = lbls(0)
-    '    lbl.Text = sender.Text
-    '    If Len(SelectedNumber) < 5 Then
-    '        LabelIndex += 1
-    '        If LabelIndex >= 5 Then
-    '            tmrHoldUp.Enabled = True
-    '            'Button1.Enabled = False
-    '            'Button2.Enabled = False
-    '            'Button3.Enabled = False
-    '            'Button4.Enabled = False
-    '            For i = 0 To SequenceIndex
-    '                If SelectedNumber = PerformedSequences(i) Then
-    '                    LagFailed = True
-    '                End If
-    '            Next
-    '            If LagFailed = False Then Reinforce()
-    '            'If LagFailed = True Then Failed()
-    '            PerformedSequences(SequenceIndex) = SelectedNumber
-    '            WriteLine(1, SelectedNumber)
-    '        End If
-    '    End If
-    '    If SequenceIndex >= 50 Then
-    '        End
-    '    End If
-    'End Sub
-    'Private Sub Sequenceready()
-    '    SelectedNumber = ""
-    '    'lblPreview1.Text = ""
-    '    'lblPreview2.Text = ""
-    '    'lblPreview3.Text = ""
-    '    'lblPreview4.Text = ""
-    '    SequenceIndex += 1
-    '    LabelIndex = 1
-    'End Sub
-
-
-
-
-
-    'Private Sub tmrHoldUp_Tick(sender As Object, e As EventArgs) Handles tmrHoldUp.Tick
-    '    Sequenceready()
-    '    tmrHoldUp.Enabled = False
-    '    'Button1.Enabled = True
-    '    'Button2.Enabled = True
-    '    'Button3.Enabled = True
-    '    'Button4.Enabled = True
-    '    'btnStim.Text = ""
-    'End Sub
-
-
-
-
-
-
-
-
-
-
-
+    Public tasaLineaBase As Integer = 0 ' O Double?
+    Public phaseChangeCheck(1) As Boolean
 
 
 
 
 
     Public Arduino As SerialPort
-        Function ArduinoVB() As Integer 'This function starts the Arduino-VB communication.
+    Function ArduinoVB() As Integer
 
-        Arduino = New SerialPort(SetUp.txtCOM.Text, 9600) 'Assigns the Arduino to the selected port at a 9600 baud rate. 
-        Arduino.Open() 'Starts the Arduino-VB communication.
+        Arduino = New SerialPort(SetUp.txtCOM.Text, 9600)
+        Arduino.Open()
         tmrStart.Enabled = True
-        'Arduino.WriteLine("abh")
         Me.Text = SetUp.txtCOM.Text
 
 
         VIList = New List(Of Integer)
         VIGen()
-        Do 'This code will run throughout the session to allow response collection. 
+        Do
             Try
-                If Arduino.BytesToRead > 0 Then 'Checks for activity on the Arduino.
-                    Actual_Response = Split(Arduino.ReadLine(), ",") 'Splits data from the arduino into separate responses.
+                If Arduino.BytesToRead > 0 Then
+                    Actual_Response = Split(Arduino.ReadLine(), ",")
                 End If
                 If (Actual_Response(0) <> Previous_Response(0) And Actual_Response(0) <> 1) Then
                     Response(1)
@@ -143,9 +80,9 @@ Public Class MainH
             My.Application.DoEvents()
         Loop
         Return 0
-        End Function
+    End Function
 
-        Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
+    Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
             tmrStart.Enabled = False
             vTimeStart = Environment.TickCount
         currentComponent += 1
@@ -157,17 +94,17 @@ Public Class MainH
             If tmrStart.Enabled = False Then
             If SetUp.rdoAll.Checked = True Then
                 RatJump()
-
                 ResponseCount(x - 1) += 1
+                responsesByBin(binCounter) += 1
 
-                bins(currentComponent - 1, binCounter) += 1
 
-                WriteLine(1, vTimeNow, x)
+                WriteLine(1, vTimeNow, binCounter, x)
+
                 If RefRdy = True Then Reinforce()
             ElseIf SetUp.rdoCenter.Checked = True Then
                 ResponseCount(x - 1) += 1
-                    WriteLine(1, vTimeNow, x)
-                    If x = 3 Then
+                WriteLine(1, vTimeNow, binCounter, x)
+                If x = 3 Then
                     RatJump()
                     If RefRdy = True Then Reinforce()
                 End If
@@ -245,8 +182,14 @@ Public Class MainH
 
         Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
             tmrVI.Enabled = False
+
+        If currentPhase = 1 Then
             RefRdy = True
-        End Sub
+        End If
+
+
+
+    End Sub
 
 
 
@@ -287,36 +230,90 @@ Public Class MainH
         End If
     End Sub
 
-    Private Sub tmrComponent_Tick(sender As Object, e As EventArgs) Handles tmrComponent.Tick
+    'Private Sub tmrComponent_Tick(sender As Object, e As EventArgs) Handles tmrComponent.Tick
 
-        If currentComponent = 1 Then
-            currentComponent += 1
-            RatMove()
-            Dim f As Integer = 0
-            For i = 0 To 11
-                f += bins(0, i)
-            Next
-            rateByPhase(0) = f / 3
-            'calcular la tasa de respuestas en cada bin  de extinción
-            'si tenemos 2 bins seguidos con menos del 80% des respuestas pasa a F3
-
-
-            'calcular la duiracion del componente 2
-            'cambiar a duración del componente 2
-        ElseIf currentComponent = 2 Then
-            currentComponent += 1
-            RatMove()
-        ElseIf currentComponent = 3 Then
-            SessionOver()
-            End
-        End If
+    '    If currentComponent = 1 Then
+    '        currentComponent += 1
+    '        RatMove()
+    '        Dim f As Integer = 0
+    '        For i = 0 To 11
+    '            f += bins(0, i)
+    '        Next
+    '        rateByPhase(0) = f / 3
+    '        'calcular la tasa de respuestas en cada bin  de extinción
+    '        'si tenemos 2 bins seguidos con menos del 80% des respuestas pasa a F3
 
 
-    End Sub
+    '        'calcular la duiracion del componente 2
+    '        'cambiar a duración del componente 2
+    '    ElseIf currentComponent = 2 Then
+    '        currentComponent += 1
+    '        RatMove()
+    '    ElseIf currentComponent = 3 Then
+    '        SessionOver()
+    '        End
+    '    End If
+
+
+    'End Sub
 
     Private Sub tmrBin_Tick(sender As Object, e As EventArgs) Handles tmrBin.Tick
         binCounter += 1
+
+        If binCounter = 12 Then
+            currentPhase = 2
+            ChangePhase()
+
+            Dim f As Integer = 0
+            For i = 9 To 11
+                f += responsesByBin(i)
+            Next
+
+            tasaLineaBase = (f / 3) * 0.2
+
+        End If
+
+        If currentPhase = 2 Then
+
+
+            If binCounter < 36 Then
+                If phaseChangeCheck(0) = False Then
+                    If responsesByBin(binCounter - 1) < tasaLineaBase Then
+                        phaseChangeCheck(0) = True
+                    End If
+                ElseIf phaseChangeCheck(0) = True Then
+                    If responsesByBin(binCounter - 1) < tasaLineaBase Then
+                        currentPhase = 3
+                        ChangePhase()
+                    Else
+                        phaseChangeCheck(0) = False
+                    End If
+                End If
+            Else
+                currentPhase = 3
+                ChangePhase()
+            End If
+
+        End If
+
+        'Cerrar el programa
+        'Limpieza "Housekeeping"
+        'Bienvenida e instrucciones
+        'Encuesta de satisfacciòn
+        'Conección Arduino
+        'Sonidos de calle de dia y de noche
+        'PRUEBAS
+
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Response(1)
+    End Sub
+
+    Private Sub ChangePhase()
+        RatMove()
+    End Sub
+
 End Class
 
 

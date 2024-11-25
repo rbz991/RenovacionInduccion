@@ -8,6 +8,7 @@
     Public RefCount As Byte
     Public RefRdy As Boolean
     Public Countdown As Integer
+    Public currentPhase As Integer = 1
     Public VIList As List(Of Integer)
     Public Structure SessionSettings
         Public Subject As String
