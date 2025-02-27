@@ -16,16 +16,18 @@ Public Class MainH
     Public rateByPhase(2) As Integer
     Public tasaLineaBase As Integer = 0 ' O Double?
     Public phaseChangeCheck(1) As Boolean
+    Public bins(0) As Integer
 
 
 
 
 
     Public Arduino As SerialPort
+
     Function ArduinoVB() As Integer
 
         Arduino = New SerialPort(SetUp.txtCOM.Text, 9600)
-        Arduino.Open()
+        ' Arduino.Open()
         tmrStart.Enabled = True
         Me.Text = SetUp.txtCOM.Text
 
@@ -72,7 +74,7 @@ Public Class MainH
                 'lblResponses4.Text = ResponseCount(3)
                 'lblResponses5.Text = ResponseCount(4)
                 'lblIV.Text = v
-                lblReforzadores.Text = RefCount
+                'lblReforzadores.Text = RefCount
                 If vTimeNow >= 900 Then SessionOver() 'This sets the criteria to finish the session.
 
             Catch ex As Exception
@@ -87,6 +89,8 @@ Public Class MainH
             vTimeStart = Environment.TickCount
         currentComponent += 1
 
+        My.Computer.Audio.Play("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\Audios\aud.wav",
+            AudioPlayMode.BackgroundLoop)
 
     End Sub
 
@@ -116,9 +120,10 @@ Public Class MainH
         Private Sub Reinforce()
             If RefRdy = True Then
 
-                RefRdy = False
-                RefCount += 1
-                WriteLine(1, vTimeNow, 6)
+            RefRdy = False
+            RefCount += 1
+            lblReforzadores.Text = RefCount
+            WriteLine(1, vTimeNow, 6)
             'Arduino.WriteLine("P")
             VIGen()
 
@@ -173,18 +178,19 @@ Public Class MainH
 
             WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
             'Arduino.WriteLine("hab")
-            Arduino.Close()
+            'Arduino.Close()
             FileClose(1)
             ' btnFinish.BackColor = Color.Red
         Catch ex As Exception
         End Try
         End Sub
 
-        Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
-            tmrVI.Enabled = False
+    Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
+        tmrVI.Enabled = False
 
         If currentPhase = 1 Then
             RefRdy = True
+
         End If
 
 
@@ -196,12 +202,16 @@ Public Class MainH
     Private Sub RatMove()
         If blnRatRotation = False Then
             blnRatRotation = True
-            pctRat.ImageLocation = "C:\Users\rbz99\Source\Repos\rbz991\RenovacionInduccion\RenovacionInduccion\Resources\rat_rotated.gif"
-            BackgroundImage = My.Resources.fondoCalle_noche
+            pctRat.ImageLocation = "C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\rat_rotated.gif"
+            BackgroundImage = Image.FromFile("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\fondoCalle_noche.jpg")
+            My.Computer.Audio.Play("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\Audios\aud.wav",
+            AudioPlayMode.BackgroundLoop)
         ElseIf blnRatRotation = True Then
             blnRatRotation = False
-            pctRat.ImageLocation = "C:\Users\rbz99\Source\Repos\rbz991\RenovacionInduccion\RenovacionInduccion\Resources\rat.gif"
-            BackgroundImage = My.Resources.fondoCalle
+            pctRat.ImageLocation = "C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\rat.gif"
+            BackgroundImage = Image.FromFile("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\fondoCalle.jpg")
+            My.Computer.Audio.Play("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\Audios\aud2.wav",
+            AudioPlayMode.BackgroundLoop)
         End If
 
     End Sub
@@ -230,42 +240,18 @@ Public Class MainH
         End If
     End Sub
 
-    'Private Sub tmrComponent_Tick(sender As Object, e As EventArgs) Handles tmrComponent.Tick
 
-    '    If currentComponent = 1 Then
-    '        currentComponent += 1
-    '        RatMove()
-    '        Dim f As Integer = 0
-    '        For i = 0 To 11
-    '            f += bins(0, i)
-    '        Next
-    '        rateByPhase(0) = f / 3
-    '        'calcular la tasa de respuestas en cada bin  de extinción
-    '        'si tenemos 2 bins seguidos con menos del 80% des respuestas pasa a F3
-
-
-    '        'calcular la duiracion del componente 2
-    '        'cambiar a duración del componente 2
-    '    ElseIf currentComponent = 2 Then
-    '        currentComponent += 1
-    '        RatMove()
-    '    ElseIf currentComponent = 3 Then
-    '        SessionOver()
-    '        End
-    '    End If
-
-
-    'End Sub
 
     Private Sub tmrBin_Tick(sender As Object, e As EventArgs) Handles tmrBin.Tick
         binCounter += 1
+        Me.Text = binCounter
 
         If binCounter = 12 Then
             currentPhase = 2
             ChangePhase()
 
             Dim f As Integer = 0
-            For i = 9 To 11
+            For i = 10 To 12
                 f += responsesByBin(i)
             Next
 
@@ -276,7 +262,8 @@ Public Class MainH
         If currentPhase = 2 Then
 
 
-            If binCounter < 36 Then
+            If binCounter > 14 And binCounter < 36 Then
+
                 If phaseChangeCheck(0) = False Then
                     If responsesByBin(binCounter - 1) < tasaLineaBase Then
                         phaseChangeCheck(0) = True
@@ -289,6 +276,7 @@ Public Class MainH
                         phaseChangeCheck(0) = False
                     End If
                 End If
+
             Else
                 currentPhase = 3
                 ChangePhase()
@@ -313,6 +301,15 @@ Public Class MainH
     Private Sub ChangePhase()
         RatMove()
     End Sub
+
+    Private Sub tmrHoldUp_Tick(sender As Object, e As EventArgs) Handles tmrHoldUp.Tick
+
+    End Sub
+
+    Private Sub tmrComponent_Tick(sender As Object, e As EventArgs) Handles tmrComponent.Tick
+
+    End Sub
+
 
 End Class
 
