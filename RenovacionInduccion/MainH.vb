@@ -18,10 +18,6 @@ Public Class MainH
     Public phaseChangeCheck(1) As Boolean
     Public bins(0) As Integer
 
-
-
-
-
     Public Arduino As SerialPort
 
     Function ArduinoVB() As Integer
@@ -89,8 +85,8 @@ Public Class MainH
             vTimeStart = Environment.TickCount
         currentComponent += 1
 
-        My.Computer.Audio.Play("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\Audios\aud.wav",
-            AudioPlayMode.BackgroundLoop)
+        Dim player As New Media.SoundPlayer(My.Resources.aud)
+        player.PlayLooping()
 
     End Sub
 
@@ -159,18 +155,7 @@ Public Class MainH
             VIList.RemoveAt(p)
         End Sub
 
-    'Private Sub btnFinish_Click(sender As Object, e As EventArgs) Handles btnFinish.Click
-    '    If btnFinish.BackColor = Color.Red Then
-    '        End
-    '    Else
-    '        WriteLine(1, "Forced exit time: " & (vTimeNow / 1000) / 60)
-    '        Arduino.WriteLine("hab")
-    '        Arduino.Close()
-    '        FileClose(1)
-    '        End
-    '    End If
-    '    End
-    'End Sub
+
 
     Private Sub SessionOver()
         Try
@@ -185,43 +170,27 @@ Public Class MainH
         End Try
         End Sub
 
-    Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
-        tmrVI.Enabled = False
-
-        If currentPhase = 1 Then
-            RefRdy = True
-
-        End If
 
 
 
-    End Sub
 
-
-
-    Private Sub RatMove()
+    Private Sub ChangePhase()
         If blnRatRotation = False Then
             blnRatRotation = True
-            pctRat.ImageLocation = "C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\rat_rotated.gif"
-            BackgroundImage = Image.FromFile("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\fondoCalle_noche.jpg")
-            My.Computer.Audio.Play("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\Audios\aud.wav",
-            AudioPlayMode.BackgroundLoop)
+            pctRat.Image = My.Resources.rat_rotated
+            BackgroundImage = My.Resources.fondoCalle_noche
+            Dim player As New Media.SoundPlayer(My.Resources.aud2)
+            player.PlayLooping()
         ElseIf blnRatRotation = True Then
-            blnRatRotation = False
-            pctRat.ImageLocation = "C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\rat.gif"
-            BackgroundImage = Image.FromFile("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\RenovacionInduccion\Resources\fondoCalle.jpg")
-            My.Computer.Audio.Play("C:\Users\proye\source\repos\RenovacionInduccion\Nueva carpeta\Audios\aud2.wav",
-            AudioPlayMode.BackgroundLoop)
+            pctRat.Image = My.Resources.rat
+            BackgroundImage = My.Resources.fondoCalle
+            Dim player As New Media.SoundPlayer(My.Resources.aud)
+            player.PlayLooping()
         End If
 
     End Sub
 
-    Private Sub RatJump()
-        If tmrRatJump.Enabled = False Then
-            tmrRatJump.Enabled = True
-        End If
 
-    End Sub
 
 
 
@@ -244,7 +213,8 @@ Public Class MainH
 
     Private Sub tmrBin_Tick(sender As Object, e As EventArgs) Handles tmrBin.Tick
         binCounter += 1
-        Me.Text = binCounter
+        Me.Text = binCounter & "," & tasaLineaBase & "," & responsesByBin(binCounter - 1)
+
 
         If binCounter = 12 Then
             currentPhase = 2
@@ -262,26 +232,28 @@ Public Class MainH
         If currentPhase = 2 Then
 
 
-            If binCounter > 14 And binCounter < 36 Then
-
-                If phaseChangeCheck(0) = False Then
-                    If responsesByBin(binCounter - 1) < tasaLineaBase Then
-                        phaseChangeCheck(0) = True
-                    End If
-                ElseIf phaseChangeCheck(0) = True Then
-                    If responsesByBin(binCounter - 1) < tasaLineaBase Then
-                        currentPhase = 3
-                        ChangePhase()
-                    Else
-                        phaseChangeCheck(0) = False
-                    End If
-                End If
-
+            If binCounter = 12 Or binCounter = 13 Then
             Else
-                currentPhase = 3
-                ChangePhase()
-            End If
+                If binCounter >= 14 And binCounter < 36 Then
 
+                    If phaseChangeCheck(0) = False Then
+                        If responsesByBin(binCounter - 1) < tasaLineaBase Then
+                            phaseChangeCheck(0) = True
+                        End If
+                    ElseIf phaseChangeCheck(0) = True Then
+                        If responsesByBin(binCounter - 1) < tasaLineaBase Then
+                            currentPhase = 3
+                            ChangePhase()
+                        Else
+                            phaseChangeCheck(0) = False
+                        End If
+                    End If
+
+                    'Else
+                    '    currentPhase = 3
+                    '    ChangePhase()
+                End If
+            End If
         End If
 
         'Cerrar el programa
@@ -294,22 +266,22 @@ Public Class MainH
 
     End Sub
 
+    Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
+        tmrVI.Enabled = False
+        If currentPhase = 1 Then
+            RefRdy = True
+        End If
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Response(1)
     End Sub
 
-    Private Sub ChangePhase()
-        RatMove()
+    Private Sub RatJump()
+        If tmrRatJump.Enabled = False Then
+            tmrRatJump.Enabled = True
+        End If
     End Sub
-
-    Private Sub tmrHoldUp_Tick(sender As Object, e As EventArgs) Handles tmrHoldUp.Tick
-
-    End Sub
-
-    Private Sub tmrComponent_Tick(sender As Object, e As EventArgs) Handles tmrComponent.Tick
-
-    End Sub
-
 
 End Class
 

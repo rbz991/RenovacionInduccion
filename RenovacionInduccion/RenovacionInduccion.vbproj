@@ -154,5 +154,11 @@
   <ItemGroup>
     <None Include="Resources\fondoCalle_noche.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aud2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aud.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

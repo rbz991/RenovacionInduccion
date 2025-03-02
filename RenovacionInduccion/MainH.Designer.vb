@@ -45,9 +45,9 @@ Partial Class MainH
         'lblReforzadores
         '
         Me.lblReforzadores.AutoSize = True
-        Me.lblReforzadores.Location = New System.Drawing.Point(869, 6)
+        Me.lblReforzadores.Location = New System.Drawing.Point(978, 8)
         Me.lblReforzadores.Name = "lblReforzadores"
-        Me.lblReforzadores.Size = New System.Drawing.Size(14, 16)
+        Me.lblReforzadores.Size = New System.Drawing.Size(18, 20)
         Me.lblReforzadores.TabIndex = 14
         Me.lblReforzadores.Text = "0"
         '
@@ -59,20 +59,20 @@ Partial Class MainH
         Me.pctRat.BackColor = System.Drawing.Color.Transparent
         Me.pctRat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pctRat.Image = Global.RenovacionInduccion.My.Resources.Resources.rat
-        Me.pctRat.Location = New System.Drawing.Point(327, 228)
+        Me.pctRat.Location = New System.Drawing.Point(368, 285)
         Me.pctRat.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pctRat.Name = "pctRat"
-        Me.pctRat.Size = New System.Drawing.Size(199, 103)
+        Me.pctRat.Size = New System.Drawing.Size(224, 129)
         Me.pctRat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pctRat.TabIndex = 13
         Me.pctRat.TabStop = False
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(101, 228)
+        Me.Button1.Location = New System.Drawing.Point(114, 285)
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(133, 103)
+        Me.Button1.Size = New System.Drawing.Size(150, 129)
         Me.Button1.TabIndex = 15
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
@@ -89,15 +89,15 @@ Partial Class MainH
         'tmrBin
         '
         Me.tmrBin.Enabled = True
-        Me.tmrBin.Interval = 3000
+        Me.tmrBin.Interval = 4000
         '
         'MainH
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.RenovacionInduccion.My.Resources.Resources.fondoCalle
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(893, 431)
+        Me.ClientSize = New System.Drawing.Size(1005, 539)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblReforzadores)
         Me.Controls.Add(Me.pctRat)

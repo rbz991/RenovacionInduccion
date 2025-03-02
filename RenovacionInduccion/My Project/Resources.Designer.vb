@@ -61,6 +61,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property aud() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("aud", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property aud2() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("aud2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property fondoCalle() As System.Drawing.Bitmap
