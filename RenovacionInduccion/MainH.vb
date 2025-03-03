@@ -11,12 +11,12 @@ Public Class MainH
     Public ratJumpCounter As Integer = 0
     Public blnRatJump As Boolean = False
     Public currentComponent As Byte = 0
-    Public responsesByBin(39) As Integer
+    Public responses(4, 40) As Integer
     Public binCounter As Integer = 0
     Public rateByPhase(2) As Integer
     Public tasaLineaBase As Integer = 0 ' O Double?
-    Public phaseChangeCheck(1) As Boolean
-    Public bins(0) As Integer
+    Public phaseChangeCheck As Boolean
+
 
     Public Arduino As SerialPort
 
@@ -57,11 +57,8 @@ Public Class MainH
                 Previous_Response(3) = Actual_Response(3)
                 Previous_Response(4) = Actual_Response(4)
 
-
-
                 If tmrStart.Enabled = False Then vTimeNow = Environment.TickCount - vTimeStart  'This keeps track of time for the Data output file.
                 'If tmrStart.Enabled = True Then vTimeNow = (Countdown) - Environment.TickCount
-
 
                 ' lblTime.Text = Round(vTimeNow / 1000)
                 'lblResponses1.Text = ResponseCount(0)
@@ -71,7 +68,6 @@ Public Class MainH
                 'lblResponses5.Text = ResponseCount(4)
                 'lblIV.Text = v
                 'lblReforzadores.Text = RefCount
-                If vTimeNow >= 900 Then SessionOver() 'This sets the criteria to finish the session.
 
             Catch ex As Exception
             End Try
@@ -81,28 +77,22 @@ Public Class MainH
     End Function
 
     Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
-            tmrStart.Enabled = False
-            vTimeStart = Environment.TickCount
+        tmrStart.Enabled = False
+        vTimeStart = Environment.TickCount
         currentComponent += 1
-
         Dim player As New Media.SoundPlayer(My.Resources.aud)
         player.PlayLooping()
-
     End Sub
 
-        Private Sub Response(x As Byte)
+    Private Sub Response(x As Byte)
             If tmrStart.Enabled = False Then
             If SetUp.rdoAll.Checked = True Then
                 RatJump()
-                ResponseCount(x - 1) += 1
-                responsesByBin(binCounter) += 1
-
-
+                responses(x - 1, binCounter) += 1
                 WriteLine(1, vTimeNow, binCounter, x)
-
                 If RefRdy = True Then Reinforce()
             ElseIf SetUp.rdoCenter.Checked = True Then
-                ResponseCount(x - 1) += 1
+                responses(x - 1, binCounter) += 1
                 WriteLine(1, vTimeNow, binCounter, x)
                 If x = 3 Then
                     RatJump()
@@ -114,22 +104,19 @@ Public Class MainH
         End Sub
 
         Private Sub Reinforce()
-            If RefRdy = True Then
-
+        If RefRdy = True Then
             RefRdy = False
             RefCount += 1
             lblReforzadores.Text = RefCount
-            WriteLine(1, vTimeNow, 6)
+            WriteLine(1, vTimeNow, binCounter, 6)
             'Arduino.WriteLine("P")
             VIGen()
-
         End If
-        End Sub
+    End Sub
 
         Private Sub VIGen()
-
-            Dim n = 10 'This value represents the VI iterations. 
-            Dim rd(n)
+        Dim n = 10 'This value represents the VI iterations. 
+        Dim rd(n)
             Dim vi(n)
             Dim order
             Randomize()
@@ -155,12 +142,16 @@ Public Class MainH
             VIList.RemoveAt(p)
         End Sub
 
-
-
     Private Sub SessionOver()
         Try
+            tmrBin.Enabled = False
+            WriteLine(1, "SESSION ENDED")
+            MessageBox.Show("Sesión finalizada, por favor contacta al responsable. Obtuviste: " & RefCount & " puntos.")
             'Preparar un resumen de los datos como preanalisis
-
+            WriteLine(1, "Responses by bin & button:")
+            For i = 0 To 39
+                WriteLine(1, i + 1 & ":" & responses(0, i) & "," & responses(1, i) & "," & responses(2, i) & "," & responses(3, i) & "," & responses(4, i))
+            Next
             WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
             'Arduino.WriteLine("hab")
             'Arduino.Close()
@@ -169,10 +160,6 @@ Public Class MainH
         Catch ex As Exception
         End Try
         End Sub
-
-
-
-
 
     Private Sub ChangePhase()
         If blnRatRotation = False Then
@@ -190,10 +177,6 @@ Public Class MainH
 
     End Sub
 
-
-
-
-
     Private Sub tmrRatJump_Tick(sender As Object, e As EventArgs) Handles tmrRatJump.Tick
         If blnRatJump = True Then
             pctRat.Top = pctRat.Top + 15
@@ -209,59 +192,52 @@ Public Class MainH
         End If
     End Sub
 
-
-
     Private Sub tmrBin_Tick(sender As Object, e As EventArgs) Handles tmrBin.Tick
         binCounter += 1
-        Me.Text = binCounter & "," & tasaLineaBase & "," & responsesByBin(binCounter - 1)
-
-
+        If binCounter = 40 Then SessionOver()
+        Me.Text = binCounter & "," & tasaLineaBase & "," & RespuestasBinPrevio()
         If binCounter = 12 Then
             currentPhase = 2
             ChangePhase()
-
-            Dim f As Integer = 0
-            For i = 10 To 12
-                f += responsesByBin(i)
+            Dim sumaLineaBase As Integer = 0
+            Dim totalValores As Integer = 0
+            For boton = 0 To 4
+                For bin = 10 To 12
+                    sumaLineaBase += responses(boton, bin) ' Sumar respuestas de todos los botones en esos bins
+                    totalValores += 1
+                Next
             Next
-
-            tasaLineaBase = (f / 3) * 0.2
-
+            ' Calcular el 20% del promedio de línea base
+            tasaLineaBase = (sumaLineaBase / totalValores) * 0.2
         End If
 
         If currentPhase = 2 Then
-
-
             If binCounter = 12 Or binCounter = 13 Then
             Else
                 If binCounter >= 14 And binCounter < 36 Then
-
-                    If phaseChangeCheck(0) = False Then
-                        If responsesByBin(binCounter - 1) < tasaLineaBase Then
-                            phaseChangeCheck(0) = True
+                    If phaseChangeCheck = False Then
+                        If RespuestasBinPrevio() < tasaLineaBase Then
+                            phaseChangeCheck = True
                         End If
-                    ElseIf phaseChangeCheck(0) = True Then
-                        If responsesByBin(binCounter - 1) < tasaLineaBase Then
+                    ElseIf phaseChangeCheck = True Then
+                        If RespuestasBinPrevio() < tasaLineaBase Then
                             currentPhase = 3
                             ChangePhase()
                         Else
-                            phaseChangeCheck(0) = False
+                            phaseChangeCheck = False
                         End If
                     End If
-
-                    'Else
-                    '    currentPhase = 3
-                    '    ChangePhase()
+                Else
+                    currentPhase = 3
+                    ChangePhase()
                 End If
             End If
         End If
 
         'Cerrar el programa
-        'Limpieza "Housekeeping"
         'Bienvenida e instrucciones
         'Encuesta de satisfacciòn
         'Conección Arduino
-        'Sonidos de calle de dia y de noche
         'PRUEBAS
 
     End Sub
@@ -282,6 +258,14 @@ Public Class MainH
             tmrRatJump.Enabled = True
         End If
     End Sub
+
+    Private Function RespuestasBinPrevio()
+        Dim rBinPrevio As Integer = 0
+        For boton = 0 To 4
+            rBinPrevio += responses(boton, binCounter - 1)
+        Next
+        Return rBinPrevio
+    End Function
 
 End Class
 

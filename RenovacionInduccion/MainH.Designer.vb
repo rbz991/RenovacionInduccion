@@ -89,7 +89,7 @@ Partial Class MainH
         'tmrBin
         '
         Me.tmrBin.Enabled = True
-        Me.tmrBin.Interval = 4000
+        Me.tmrBin.Interval = 1000
         '
         'MainH
         '

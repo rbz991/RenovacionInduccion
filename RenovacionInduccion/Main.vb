@@ -65,11 +65,11 @@ Public Class Main
                 If tmrStart.Enabled = False Then vTimeNow = Environment.TickCount - vTimeStart  'This keeps track of time for the Data output file.
                 If tmrStart.Enabled = True Then vTimeNow = (Countdown) - Environment.TickCount
                 lblTime.Text = Round(vTimeNow / 1000)
-                lblResponses1.Text = ResponseCount(0)
-                lblResponses2.Text = ResponseCount(1)
-                lblResponses3.Text = ResponseCount(2)
-                lblResponses4.Text = ResponseCount(3)
-                lblResponses5.Text = ResponseCount(4)
+                'lblResponses1.Text = ResponseCount(0)
+                'lblResponses2.Text = ResponseCount(1)
+                'lblResponses3.Text = ResponseCount(2)
+                'lblResponses4.Text = ResponseCount(3)
+                'lblResponses5.Text = ResponseCount(4)
                 lblIV.Text = v
                 lblReinforcers.Text = RefCount
                 If lblTime.Text >= 1800 Then SessionOver() 'This sets the criteria to finish the session.
@@ -93,11 +93,11 @@ Public Class Main
             If SetUp.rdoAll.Checked = True Then
                 Arduino.WriteLine("AB")
                 tmrStim.Enabled = True
-                ResponseCount(x - 1) += 1
+                'ResponseCount(x - 1) += 1
                 WriteLine(1, vTimeNow, x)
                 If RefRdy = True Then Reinforce()
             ElseIf SetUp.rdoCenter.Checked = True Then
-                ResponseCount(x - 1) += 1
+                'ResponseCount(x - 1) += 1
                 WriteLine(1, vTimeNow, x)
                 If x = 3 Then
                     Arduino.WriteLine("AB")
