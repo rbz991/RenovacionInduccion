@@ -4,13 +4,13 @@ Imports System.IO.Ports
 Public Class MainH
     Public SelectedNumber As String
     Public PerformedSequences(49) As Integer
-    Public LabelIndex As Byte = 1
-    Public SequenceIndex As Byte = 0
+    Public LabelIndex As Integer = 1
+    Public SequenceIndex As Integer = 0
     Public LagFailed As Boolean = False
     Public blnRatRotation = False
     Public ratJumpCounter As Integer = 0
     Public blnRatJump As Boolean = False
-    Public currentComponent As Byte = 0
+    Public currentComponent As Integer = 0
     Public responses(4, 40) As Integer
     Public binCounter As Integer = 0
     Public rateByPhase(2) As Integer
@@ -23,7 +23,7 @@ Public Class MainH
     Function ArduinoVB() As Integer
 
         Arduino = New SerialPort(SetUp.txtCOM.Text, 9600)
-        ' Arduino.Open()
+        Arduino.Open()
         tmrStart.Enabled = True
         Me.Text = SetUp.txtCOM.Text
 
@@ -60,14 +60,14 @@ Public Class MainH
                 If tmrStart.Enabled = False Then vTimeNow = Environment.TickCount - vTimeStart  'This keeps track of time for the Data output file.
                 'If tmrStart.Enabled = True Then vTimeNow = (Countdown) - Environment.TickCount
 
-                ' lblTime.Text = Round(vTimeNow / 1000)
+                'lblTime.Text = Round(vTimeNow / 1000)
                 'lblResponses1.Text = ResponseCount(0)
                 'lblResponses2.Text = ResponseCount(1)
                 'lblResponses3.Text = ResponseCount(2)
                 'lblResponses4.Text = ResponseCount(3)
                 'lblResponses5.Text = ResponseCount(4)
                 'lblIV.Text = v
-                'lblReforzadores.Text = RefCount
+                ' lblReforzadores.Text = RefCount
 
             Catch ex As Exception
             End Try
@@ -84,8 +84,8 @@ Public Class MainH
         player.PlayLooping()
     End Sub
 
-    Private Sub Response(x As Byte)
-            If tmrStart.Enabled = False Then
+    Private Sub Response(x As Integer)
+        If tmrStart.Enabled = False Then
             If SetUp.rdoAll.Checked = True Then
                 RatJump()
                 responses(x - 1, binCounter) += 1
@@ -98,49 +98,53 @@ Public Class MainH
                     RatJump()
                     If RefRdy = True Then Reinforce()
                 End If
-                End If
-
             End If
-        End Sub
 
-        Private Sub Reinforce()
+        End If
+    End Sub
+
+    Private Sub Reinforce()
         If RefRdy = True Then
             RefRdy = False
-            RefCount += 1
-            lblReforzadores.Text = RefCount
+            RefCount += 0.5
+            lblMasUno.Visible = True
+            tmrMasUno.Enabled = True
+            'Dim player As New Media.SoundPlayer(My.Resources.aud2)
+            'player.Play()
+            lblReforzadores.Text = "$" & RefCount & " MXN"
             WriteLine(1, vTimeNow, binCounter, 6)
             'Arduino.WriteLine("P")
             VIGen()
         End If
     End Sub
 
-        Private Sub VIGen()
+    Private Sub VIGen()
         Dim n = 10 'This value represents the VI iterations. 
         Dim rd(n)
-            Dim vi(n)
-            Dim order
-            Randomize()
-            If VIList.Count = 0 Then
-                For m As Integer = 1 To n
-                    If m = n Then vi(m) = v * (1 + Log(n)) : GoTo 1
-                    vi(m) = v * (1 + (Log(n)) + (n - m) * (Log(n - m)) - (n - m + 1) * Log(n - m + 1))
-1:                  order = Int((n * Rnd() + 1))
-                    If rd(order) = 0 Then
-                        rd(order) = vi(m)
-                    Else
-                        GoTo 1
-                    End If
-                Next
-                For a As Integer = 1 To n
-                    VIList.Add(rd(a))
-                Next
-            End If
-            Dim Rand As New Random
-            Dim p As Integer = Rand.Next(VIList.Count)
-            tmrVI.Interval = (VIList.Item(p) + 1) * 1000
-            tmrVI.Enabled = True
-            VIList.RemoveAt(p)
-        End Sub
+        Dim vi(n)
+        Dim order
+        Randomize()
+        If VIList.Count = 0 Then
+            For m As Integer = 1 To n
+                If m = n Then vi(m) = v * (1 + Log(n)) : GoTo 1
+                vi(m) = v * (1 + (Log(n)) + (n - m) * (Log(n - m)) - (n - m + 1) * Log(n - m + 1))
+1:              order = Int((n * Rnd() + 1))
+                If rd(order) = 0 Then
+                    rd(order) = vi(m)
+                Else
+                    GoTo 1
+                End If
+            Next
+            For a As Integer = 1 To n
+                VIList.Add(rd(a))
+            Next
+        End If
+        Dim Rand As New Random
+        Dim p As Integer = Rand.Next(VIList.Count)
+        tmrVI.Interval = (VIList.Item(p) + 1) * 1000
+        tmrVI.Enabled = True
+        VIList.RemoveAt(p)
+    End Sub
 
     Private Sub SessionOver()
         Try
@@ -154,12 +158,12 @@ Public Class MainH
             Next
             WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
             'Arduino.WriteLine("hab")
-            'Arduino.Close()
+            Arduino.Close()
             FileClose(1)
-            ' btnFinish.BackColor = Color.Red
+            'btnFinish.BackColor = Color.Red
         Catch ex As Exception
         End Try
-        End Sub
+    End Sub
 
     Private Sub ChangePhase()
         If blnRatRotation = False Then
@@ -195,7 +199,7 @@ Public Class MainH
     Private Sub tmrBin_Tick(sender As Object, e As EventArgs) Handles tmrBin.Tick
         binCounter += 1
         If binCounter = 40 Then SessionOver()
-        Me.Text = binCounter & "," & tasaLineaBase & "," & RespuestasBinPrevio()
+        ' Me.Text = binCounter & "," & tasaLineaBase & "," & RespuestasBinPrevio()
         If binCounter = 12 Then
             currentPhase = 2
             ChangePhase()
@@ -249,7 +253,7 @@ Public Class MainH
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Response(1)
     End Sub
 
@@ -267,6 +271,10 @@ Public Class MainH
         Return rBinPrevio
     End Function
 
+    Private Sub tmrMasUno_Tick(sender As Object, e As EventArgs) Handles tmrMasUno.Tick
+        tmrMasUno.Enabled = False
+        lblMasUno.Visible = False
+    End Sub
 End Class
 
 

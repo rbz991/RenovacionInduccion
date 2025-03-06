@@ -4,14 +4,14 @@
     Public Previous_Response(4) As String
     Public vTimeNow As Integer
     Public vTimeStart As Integer
-    Public RefCount As Byte
+    Public RefCount As Double
     Public RefRdy As Boolean
     Public Countdown As Integer
     Public currentPhase As Integer = 1
     Public VIList As List(Of Integer)
     Public Structure SessionSettings
         Public Subject As String
-        Public Session As Byte
+        Public Session As Integer
         Public Port As String
         Public Phase As String
         Public ActiveLever As String

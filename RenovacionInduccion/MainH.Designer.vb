@@ -28,10 +28,11 @@ Partial Class MainH
         Me.lblReforzadores = New System.Windows.Forms.Label()
         Me.tmrVI = New System.Windows.Forms.Timer(Me.components)
         Me.pctRat = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.tmrRatJump = New System.Windows.Forms.Timer(Me.components)
         Me.tmrComponent = New System.Windows.Forms.Timer(Me.components)
         Me.tmrBin = New System.Windows.Forms.Timer(Me.components)
+        Me.lblMasUno = New System.Windows.Forms.Label()
+        Me.tmrMasUno = New System.Windows.Forms.Timer(Me.components)
         CType(Me.pctRat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -44,12 +45,17 @@ Partial Class MainH
         '
         'lblReforzadores
         '
+        Me.lblReforzadores.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblReforzadores.AutoSize = True
-        Me.lblReforzadores.Location = New System.Drawing.Point(978, 8)
+        Me.lblReforzadores.BackColor = System.Drawing.Color.Transparent
+        Me.lblReforzadores.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.125!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblReforzadores.ForeColor = System.Drawing.Color.Lime
+        Me.lblReforzadores.Location = New System.Drawing.Point(1130, 9)
+        Me.lblReforzadores.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReforzadores.Name = "lblReforzadores"
-        Me.lblReforzadores.Size = New System.Drawing.Size(18, 20)
+        Me.lblReforzadores.Size = New System.Drawing.Size(421, 85)
         Me.lblReforzadores.TabIndex = 14
-        Me.lblReforzadores.Text = "0"
+        Me.lblReforzadores.Text = "$0.00 MXN"
         '
         'tmrVI
         '
@@ -59,23 +65,13 @@ Partial Class MainH
         Me.pctRat.BackColor = System.Drawing.Color.Transparent
         Me.pctRat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pctRat.Image = Global.RenovacionInduccion.My.Resources.Resources.rat
-        Me.pctRat.Location = New System.Drawing.Point(368, 285)
-        Me.pctRat.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pctRat.Location = New System.Drawing.Point(976, 679)
+        Me.pctRat.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.pctRat.Name = "pctRat"
-        Me.pctRat.Size = New System.Drawing.Size(224, 129)
+        Me.pctRat.Size = New System.Drawing.Size(720, 369)
         Me.pctRat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pctRat.TabIndex = 13
         Me.pctRat.TabStop = False
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(114, 285)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(150, 129)
-        Me.Button1.TabIndex = 15
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'tmrRatJump
         '
@@ -89,20 +85,38 @@ Partial Class MainH
         'tmrBin
         '
         Me.tmrBin.Enabled = True
-        Me.tmrBin.Interval = 1000
+        Me.tmrBin.Interval = 5000
+        '
+        'lblMasUno
+        '
+        Me.lblMasUno.AutoSize = True
+        Me.lblMasUno.BackColor = System.Drawing.Color.Transparent
+        Me.lblMasUno.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.125!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMasUno.ForeColor = System.Drawing.Color.Lime
+        Me.lblMasUno.Location = New System.Drawing.Point(1130, 558)
+        Me.lblMasUno.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblMasUno.Name = "lblMasUno"
+        Me.lblMasUno.Size = New System.Drawing.Size(466, 85)
+        Me.lblMasUno.TabIndex = 16
+        Me.lblMasUno.Text = "+$0.50 MXN"
+        Me.lblMasUno.Visible = False
+        '
+        'tmrMasUno
+        '
+        Me.tmrMasUno.Interval = 1000
         '
         'MainH
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.RenovacionInduccion.My.Resources.Resources.fondoCalle
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1005, 539)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(1564, 892)
+        Me.Controls.Add(Me.lblMasUno)
         Me.Controls.Add(Me.lblReforzadores)
         Me.Controls.Add(Me.pctRat)
         Me.DoubleBuffered = True
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.Name = "MainH"
         Me.Text = "Form1"
         CType(Me.pctRat, System.ComponentModel.ISupportInitialize).EndInit()
@@ -115,8 +129,9 @@ Partial Class MainH
     Friend WithEvents tmrStart As Timer
     Friend WithEvents lblReforzadores As Label
     Friend WithEvents tmrVI As Timer
-    Friend WithEvents Button1 As Button
     Friend WithEvents tmrRatJump As Timer
     Friend WithEvents tmrComponent As Timer
     Friend WithEvents tmrBin As Timer
+    Friend WithEvents lblMasUno As Label
+    Friend WithEvents tmrMasUno As Timer
 End Class
