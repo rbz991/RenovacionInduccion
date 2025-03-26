@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.Specialized.BitVector32
+Imports System.Threading
 
 Public Class SetUp
     Private Sub rdoReinforcement_CheckedChanged(sender As Object, e As EventArgs) Handles rdoReinforcement.CheckedChanged
@@ -29,7 +30,10 @@ Public Class SetUp
         If CheckBox1.Checked = True Then
             Dim x As New MainH
             x.Show()
-            x.ArduinoVB()
+            isReading = True
+            hiloArduino = New Thread(AddressOf x.ArduinoVB)
+            hiloArduino.Start()
+            'x.ArduinoVB()
         ElseIf CheckBox1.Checked = False Then
             Dim x As New Main
             x.Show()

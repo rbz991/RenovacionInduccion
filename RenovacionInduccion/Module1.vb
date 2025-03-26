@@ -1,4 +1,10 @@
-﻿Module Module1
+﻿Imports System.IO.Ports
+Imports System.Threading
+
+Module Module1
+    Public Arduino As SerialPort
+    Public hiloArduino As Thread
+    Public isReading As Boolean = False
     Public v = 1
     Public Actual_Response(4) As String
     Public Previous_Response(4) As String

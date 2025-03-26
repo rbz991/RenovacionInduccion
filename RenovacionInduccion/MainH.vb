@@ -1,5 +1,6 @@
 ﻿Imports System.Math
 Imports System.IO.Ports
+Imports System.Threading
 
 Public Class MainH
     Public SelectedNumber As String
@@ -18,9 +19,9 @@ Public Class MainH
     Public phaseChangeCheck As Boolean
 
 
-    Public Arduino As SerialPort
 
-    Function ArduinoVB() As Integer
+
+    Public Sub ArduinoVB()
 
         Arduino = New SerialPort(SetUp.txtCOM.Text, 9600)
         Arduino.Open()
@@ -30,51 +31,32 @@ Public Class MainH
 
         VIList = New List(Of Integer)
         VIGen()
-        Do
+        While isReading
             Try
                 If Arduino.BytesToRead > 0 Then
-                    Actual_Response = Split(Arduino.ReadLine(), ",")
-                End If
-                If (Actual_Response(0) <> Previous_Response(0) And Actual_Response(0) <> 1) Then
-                    Response(1)
-                End If
-                If (Actual_Response(1) <> Previous_Response(1) And Actual_Response(1) <> 1) Then
-                    Response(2)
-                End If
-                If (Actual_Response(2) <> Previous_Response(2) And Actual_Response(2) <> 1) Then
-                    Response(3)
-                End If
-                If (Actual_Response(3) <> Previous_Response(3) And Actual_Response(3) <> 1) Then
-                    Response(4)
-                End If
-                If (Actual_Response(4) <> Previous_Response(4) And Actual_Response(4) <> 1) Then
-                    Response(5)
+                    Actual_Response = Split(Arduino.ReadLine().Trim(), ",")
+
+                    If Actual_Response.Length >= 5 Then
+                        For i As Integer = 0 To 4
+                            If (Actual_Response(i) <> Previous_Response(i) And Actual_Response(i) <> "1") Then
+                                Response(i + 1)
+                            End If
+                            Previous_Response(i) = Actual_Response(i)
+                        Next
+                    End If
                 End If
 
-                Previous_Response(0) = Actual_Response(0)
-                Previous_Response(1) = Actual_Response(1)
-                Previous_Response(2) = Actual_Response(2)
-                Previous_Response(3) = Actual_Response(3)
-                Previous_Response(4) = Actual_Response(4)
+                If Not tmrStart.Enabled Then
+                    vTimeNow = Environment.TickCount - vTimeStart
+                End If
 
-                If tmrStart.Enabled = False Then vTimeNow = Environment.TickCount - vTimeStart  'This keeps track of time for the Data output file.
-                'If tmrStart.Enabled = True Then vTimeNow = (Countdown) - Environment.TickCount
-
-                'lblTime.Text = Round(vTimeNow / 1000)
-                'lblResponses1.Text = ResponseCount(0)
-                'lblResponses2.Text = ResponseCount(1)
-                'lblResponses3.Text = ResponseCount(2)
-                'lblResponses4.Text = ResponseCount(3)
-                'lblResponses5.Text = ResponseCount(4)
-                'lblIV.Text = v
-                ' lblReforzadores.Text = RefCount
-
+                Thread.Sleep(10) ' evita consumir mucha CPU
             Catch ex As Exception
+                Debug.WriteLine(ex.Message)
             End Try
-            My.Application.DoEvents()
-        Loop
-        Return 0
-    End Function
+        End While
+
+    End Sub
 
     Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
         tmrStart.Enabled = False
@@ -158,7 +140,13 @@ Public Class MainH
             Next
             WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
             'Arduino.WriteLine("hab")
-            Arduino.Close()
+            isReading = False
+            If hiloArduino IsNot Nothing AndAlso hiloArduino.IsAlive Then
+                hiloArduino.Join()
+            End If
+            If Arduino IsNot Nothing AndAlso Arduino.IsOpen Then
+                Arduino.Close()
+            End If
             FileClose(1)
             'btnFinish.BackColor = Color.Red
         Catch ex As Exception
