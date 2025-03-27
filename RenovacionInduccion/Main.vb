@@ -12,7 +12,7 @@ Public Class Main
         Arduino.WriteLine("abh")
         Me.Text = SetUp.txtCOM.Text
         lblSubject.Text = SetUp.txtSubject.Text
-        lblSession.Text = SetUp.txtSession.Text
+
         lblCOM.Text = SetUp.txtCOM.Text
         SetUp.WindowState = FormWindowState.Minimized
         VIList = New List(Of Integer)

@@ -117,28 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="tmrHoldUp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="tmrStart.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>212, 17</value>
-  </metadata>
-  <metadata name="tmrVI.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>483, 28</value>
-  </metadata>
-  <metadata name="tmrRatJump.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>580, 25</value>
-  </metadata>
-  <metadata name="tmrComponent.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>307, 25</value>
-  </metadata>
-  <metadata name="tmrBin.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>805, 21</value>
-  </metadata>
-  <metadata name="tmrMasUno.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>956, 21</value>
-  </metadata>
-  <metadata name="Timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1117, 23</value>
-  </metadata>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>
+Por este medio manifiesto mi consentimiento para participar voluntariamente en la investigación realizada por el Laboratorio Digital de Análisis de la Conducta de la Facultad de Psicología de la UNAM, 
+misma que consiste en realizar una tarea mediante un control y teniendo ésta una duración máxima de 10 minutos.
+
+Doy mi consentimiento y entiendo que:
+
+- Mi participación no representa riesgo para mi salud e integridad física.
+
+- Los datos generados por mi participación son confidenciales y serán utilizados sólo con fines académicos.
+
+- Mi participación no implica ningún costo. 
+
+- Puedo expresar mis dudas en el transcurso del experimento al investigador responsable.
+
+- Puedo retirarme del proyecto si lo considero conveniente a mis intereses, solicitando, si así lo deseo, recuperar toda la información obtenida de mi participación sin ninguna sanción o repercusión.
+
+- Para más información sobre el experimento contáctenos en: ladaclabo@gmail.com</value>
+  </data>
 </root>

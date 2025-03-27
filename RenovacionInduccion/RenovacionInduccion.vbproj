@@ -73,10 +73,35 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consentimiento.Designer.vb">
+      <DependentUpon>Consentimiento.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consentimiento.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainH.Designer.vb">
       <DependentUpon>MainH.vb</DependentUpon>
     </Compile>
     <Compile Include="MainH.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Instrucciones.vb" />
+    <Compile Include="Salida.Designer.vb">
+      <DependentUpon>Salida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Salida.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SetUp.vb">
@@ -111,11 +136,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Consentimiento.resx">
+      <DependentUpon>Consentimiento.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainH.resx">
       <DependentUpon>MainH.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Salida.resx">
+      <DependentUpon>Salida.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetUp.resx">
       <DependentUpon>SetUp.vb</DependentUpon>
@@ -159,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\aud.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coin-drops-and-spins-272429.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
