@@ -32,7 +32,7 @@ Public Class SetUp
         ElseIf CheckBox1.Checked = False Then
             Dim x As New Main
             x.Show()
-            x.ArduinoVB()
+            'x.ArduinoVB()
         End If
 
     End Sub
