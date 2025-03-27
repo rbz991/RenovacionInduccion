@@ -2,11 +2,11 @@
 Imports System.Threading
 
 Public Class SetUp
-    Private Sub rdoReinforcement_CheckedChanged(sender As Object, e As EventArgs) Handles rdoReinforcement.CheckedChanged
+    Private Sub rdoReinforcement_CheckedChanged(sender As Object, e As EventArgs)
         grpActiveLever.Visible = True
     End Sub
 
-    Private Sub rdoExtinction_CheckedChanged(sender As Object, e As EventArgs) Handles rdoExtinction.CheckedChanged
+    Private Sub rdoExtinction_CheckedChanged(sender As Object, e As EventArgs)
         grpActiveLever.Visible = False
         rdoAll.Checked = False
         rdoCenter.Checked = False
@@ -14,9 +14,8 @@ Public Class SetUp
 
     Private Sub btnComenzar_Click(sender As Object, e As EventArgs) Handles btnComenzar.Click
         v = txtIV.Text
-        FileOpen(1, "C:\Data\" & txtSubject.Text & "_" & txtSession.Text & "_" & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt", OpenMode.Append)
+        FileOpen(1, "C:\Data\" & txtSubject.Text & "_" & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss") & ".txt", OpenMode.Append)
         WriteLine(1, "Subject: " & txtSubject.Text)
-        WriteLine(1, "Session: " & txtSession.Text)
         WriteLine(1, "COM Port: " & txtCOM.Text)
         WriteLine(1, "Date: " & Format(Date.Now, "dd-MM-yyyy_hh-mm-ss"))
         WriteLine(1, "Lever 1 response: 1")
@@ -28,17 +27,16 @@ Public Class SetUp
         WriteLine(1, "*")
         ' FileOpen(1, "G:\My Drive\Datoz\InducciónVar\TEST.txt", OpenMode.Append)
         If CheckBox1.Checked = True Then
-            Dim x As New MainH
+            Dim x As New Consentimiento
             x.Show()
-            isReading = True
-            hiloArduino = New Thread(AddressOf x.ArduinoVB)
-            hiloArduino.Start()
             'x.ArduinoVB()
         ElseIf CheckBox1.Checked = False Then
             Dim x As New Main
             x.Show()
-            x.ArduinoVB()
+            'x.ArduinoVB()
         End If
 
     End Sub
+
+
 End Class

@@ -117,28 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="tmrHoldUp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="tmrStart.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>212, 17</value>
-  </metadata>
-  <metadata name="tmrVI.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>483, 28</value>
-  </metadata>
-  <metadata name="tmrRatJump.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>580, 25</value>
-  </metadata>
-  <metadata name="tmrComponent.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>307, 25</value>
-  </metadata>
-  <metadata name="tmrBin.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>805, 21</value>
-  </metadata>
-  <metadata name="tmrMasUno.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>956, 21</value>
-  </metadata>
-  <metadata name="Timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1117, 23</value>
-  </metadata>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Gracias por aceptar participar en este estudio. 
+
+Tu tarea es obtener tanto dinero  como sea posible, para ello será necesario
+presionar los botones del control. 
+
+Responde tantas veces como desees, pero no mantengas presionado ningún botón. 
+Cuando termines de respodner la encuesta final, comenta al aplicador que has finalizado.
+  
+Cuando estés listo (a) para comenzar, presiona “comenzar”. Una vez que presiones este botón,
+unicamente podrás responder con el control.
+
+¡Suerte!</value>
+  </data>
 </root>

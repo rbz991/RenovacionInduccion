@@ -12,21 +12,22 @@ Public Class MainH
     Public ratJumpCounter As Integer = 0
     Public blnRatJump As Boolean = False
     Public currentComponent As Integer = 0
-    Public responses(4, 40) As Integer
+    Public responses(4, 40) As Double
     Public binCounter As Integer = 0
     Public rateByPhase(2) As Integer
     Public tasaLineaBase As Integer = 0 ' O Double?
     Public phaseChangeCheck As Boolean
+    Dim contador As Decimal = 0.00D
+    Public Arduino As SerialPort
 
-
-
+    Public Sub ArduinoVB()
 
     Public Sub ArduinoVB()
 
         Arduino = New SerialPort(SetUp.txtCOM.Text, 9600)
         Arduino.Open()
         tmrStart.Enabled = True
-        Me.Text = SetUp.txtCOM.Text
+        'Me.Text = SetUp.txtCOM.Text
 
 
         VIList = New List(Of Integer)
@@ -62,9 +63,10 @@ Public Class MainH
         tmrStart.Enabled = False
         vTimeStart = Environment.TickCount
         currentComponent += 1
-        Dim player As New Media.SoundPlayer(My.Resources.aud)
-        player.PlayLooping()
+        Timer1.Enabled = True
+        'CHECAR CON RODRIGO
     End Sub
+
 
     Private Sub Response(x As Integer)
         If tmrStart.Enabled = False Then
@@ -88,15 +90,15 @@ Public Class MainH
     Private Sub Reinforce()
         If RefRdy = True Then
             RefRdy = False
-            RefCount += 0.5
+            contador += 0.5D
             lblMasUno.Visible = True
             tmrMasUno.Enabled = True
-            'Dim player As New Media.SoundPlayer(My.Resources.aud2)
-            'player.Play()
-            lblReforzadores.Text = "$" & RefCount & " MXN"
+            lblReforzadores.Text = "$" & contador & " MXN"
             WriteLine(1, vTimeNow, binCounter, 6)
-            'Arduino.WriteLine("P")
             VIGen()
+            Dim player As New Media.SoundPlayer(My.Resources.aud3)
+            player.Play()
+            Timer1.Enabled = True
         End If
     End Sub
 
@@ -160,6 +162,8 @@ Public Class MainH
             BackgroundImage = My.Resources.fondoCalle_noche
             Dim player As New Media.SoundPlayer(My.Resources.aud2)
             player.PlayLooping()
+            Timer1.Enabled = False
+            RefRdy = False
         ElseIf blnRatRotation = True Then
             pctRat.Image = My.Resources.rat
             BackgroundImage = My.Resources.fondoCalle
@@ -191,7 +195,7 @@ Public Class MainH
         If binCounter = 12 Then
             currentPhase = 2
             ChangePhase()
-            Dim sumaLineaBase As Integer = 0
+            Dim sumaLineaBase As Double = 0
             Dim totalValores As Integer = 0
             For boton = 0 To 4
                 For bin = 10 To 12
@@ -222,6 +226,7 @@ Public Class MainH
                 Else
                     currentPhase = 3
                     ChangePhase()
+
                 End If
             End If
         End If
@@ -263,6 +268,16 @@ Public Class MainH
         tmrMasUno.Enabled = False
         lblMasUno.Visible = False
     End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Timer1.Enabled = False
+        Dim player As New Media.SoundPlayer(My.Resources.aud)
+        player.PlayLooping()
+    End Sub
+
+
+
+
 End Class
 
 

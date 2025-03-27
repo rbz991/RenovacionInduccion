@@ -139,4 +139,7 @@
   <data name="aud2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aud2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="aud3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coin-drops-and-spins-272429.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
