@@ -51,9 +51,10 @@ Partial Class MainH
         Me.lblReforzadores.BackColor = System.Drawing.Color.Transparent
         Me.lblReforzadores.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.125!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblReforzadores.ForeColor = System.Drawing.Color.Lime
-        Me.lblReforzadores.Location = New System.Drawing.Point(753, 6)
+        Me.lblReforzadores.Location = New System.Drawing.Point(1130, 9)
+        Me.lblReforzadores.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReforzadores.Name = "lblReforzadores"
-        Me.lblReforzadores.Size = New System.Drawing.Size(265, 54)
+        Me.lblReforzadores.Size = New System.Drawing.Size(421, 85)
         Me.lblReforzadores.TabIndex = 14
         Me.lblReforzadores.Text = "$0.00 MXN"
         '
@@ -65,10 +66,10 @@ Partial Class MainH
         Me.pctRat.BackColor = System.Drawing.Color.Transparent
         Me.pctRat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pctRat.Image = Global.RenovacionInduccion.My.Resources.Resources.rat
-        Me.pctRat.Location = New System.Drawing.Point(651, 435)
-        Me.pctRat.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.pctRat.Location = New System.Drawing.Point(976, 680)
+        Me.pctRat.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.pctRat.Name = "pctRat"
-        Me.pctRat.Size = New System.Drawing.Size(480, 236)
+        Me.pctRat.Size = New System.Drawing.Size(720, 369)
         Me.pctRat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pctRat.TabIndex = 13
         Me.pctRat.TabStop = False
@@ -93,9 +94,10 @@ Partial Class MainH
         Me.lblMasUno.BackColor = System.Drawing.Color.Transparent
         Me.lblMasUno.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.125!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMasUno.ForeColor = System.Drawing.Color.Lime
-        Me.lblMasUno.Location = New System.Drawing.Point(753, 357)
+        Me.lblMasUno.Location = New System.Drawing.Point(1130, 558)
+        Me.lblMasUno.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMasUno.Name = "lblMasUno"
-        Me.lblMasUno.Size = New System.Drawing.Size(293, 54)
+        Me.lblMasUno.Size = New System.Drawing.Size(466, 85)
         Me.lblMasUno.TabIndex = 16
         Me.lblMasUno.Text = "+$0.50 MXN"
         Me.lblMasUno.Visible = False
@@ -110,16 +112,16 @@ Partial Class MainH
         '
         'MainH
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.RenovacionInduccion.My.Resources.Resources.fondoCalle
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1043, 571)
+        Me.ClientSize = New System.Drawing.Size(1564, 892)
         Me.Controls.Add(Me.lblMasUno)
         Me.Controls.Add(Me.lblReforzadores)
         Me.Controls.Add(Me.pctRat)
         Me.DoubleBuffered = True
-        Me.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
         Me.Name = "MainH"
         Me.Text = "Form1"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

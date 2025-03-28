@@ -20,7 +20,7 @@ Public Class MainH
     Dim contador As Decimal = 0.00D
     Public Arduino As SerialPort
 
-    Public Sub ArduinoVB()
+
 
     Public Sub ArduinoVB()
 
@@ -29,36 +29,65 @@ Public Class MainH
         tmrStart.Enabled = True
         'Me.Text = SetUp.txtCOM.Text
 
-
+        ardReading = True
         VIList = New List(Of Integer)
         VIGen()
-        While isReading
+        While ardReading = True
+
             Try
                 If Arduino.BytesToRead > 0 Then
-                    Actual_Response = Split(Arduino.ReadLine().Trim(), ",")
+                    Dim linea As String = Arduino.ReadLine().Trim()
+                    Dim partes As String() = linea.Split(","c)
 
-                    If Actual_Response.Length >= 5 Then
-                        For i As Integer = 0 To 4
-                            If (Actual_Response(i) <> Previous_Response(i) And Actual_Response(i) <> "1") Then
-                                Response(i + 1)
-                            End If
-                            Previous_Response(i) = Actual_Response(i)
-                        Next
+                    ' Ignorar si no llegan 5 datos completos
+                    If partes.Length < 5 Then Continue While
+
+                    Actual_Response = partes
+                End If
+
+                If (Actual_Response(0) <> Previous_Response(0) And Actual_Response(0) <> 1) Then
+                        Response(1)
                     End If
+                    If (Actual_Response(1) <> Previous_Response(1) And Actual_Response(1) <> 1) Then
+                        Response(2)
+                    End If
+                    If (Actual_Response(2) <> Previous_Response(2) And Actual_Response(2) <> 1) Then
+                        Response(3)
+                    End If
+                    If (Actual_Response(3) <> Previous_Response(3) And Actual_Response(3) <> 1) Then
+                        Response(4)
+                    End If
+                    If (Actual_Response(4) <> Previous_Response(4) And Actual_Response(4) <> 1) Then
+                        Response(5)
+
                 End If
 
-                If Not tmrStart.Enabled Then
-                    vTimeNow = Environment.TickCount - vTimeStart
-                End If
+                    Previous_Response(0) = Actual_Response(0)
+                    Previous_Response(1) = Actual_Response(1)
+                    Previous_Response(2) = Actual_Response(2)
+                    Previous_Response(3) = Actual_Response(3)
+                    Previous_Response(4) = Actual_Response(4)
 
-                Thread.Sleep(10) ' evita consumir mucha CPU
+                    If tmrStart.Enabled = False Then vTimeNow = Environment.TickCount - vTimeStart  'This keeps track of time for the Data output file.
+                'If tmrStart.Enabled = True Then vTimeNow = (Countdown) - Environment.TickCount
+
+                'lblTime.Text = Round(vTimeNow / 1000)
+                'lblResponses1.Text = ResponseCount(0)
+                'lblResponses2.Text = ResponseCount(1)
+                'lblResponses3.Text = ResponseCount(2)
+                'lblResponses4.Text = ResponseCount(3)
+                'lblResponses5.Text = ResponseCount(4)
+                'lblIV.Text = v
+                ' lblReforzadores.Text = RefCount
+
             Catch ex As Exception
-                Debug.WriteLine(ex.Message)
+
             End Try
+                My.Application.DoEvents()
         End While
 
     End Sub
-
+    Dim ardReading As Boolean = False
     Private Sub tmrStart_Tick(sender As Object, e As EventArgs) Handles tmrStart.Tick
         tmrStart.Enabled = False
         vTimeStart = Environment.TickCount
@@ -131,7 +160,10 @@ Public Class MainH
     End Sub
 
     Private Sub SessionOver()
+        ardReading = False
+
         Try
+
             tmrBin.Enabled = False
             WriteLine(1, "SESSION ENDED")
             MessageBox.Show("Sesión finalizada, por favor contacta al responsable. Obtuviste: " & RefCount & " puntos.")
@@ -142,15 +174,13 @@ Public Class MainH
             Next
             WriteLine(1, "Total time: " & (vTimeNow / 1000) / 60)
             'Arduino.WriteLine("hab")
-            isReading = False
-            If hiloArduino IsNot Nothing AndAlso hiloArduino.IsAlive Then
-                hiloArduino.Join()
-            End If
-            If Arduino IsNot Nothing AndAlso Arduino.IsOpen Then
-                Arduino.Close()
-            End If
-            FileClose(1)
+
+
+
+            Arduino.Close()
             'btnFinish.BackColor = Color.Red
+            Dim x As New Salida
+            x.Show()
         Catch ex As Exception
         End Try
     End Sub
@@ -187,57 +217,67 @@ Public Class MainH
             If ratJumpCounter = 5 Then blnRatJump = True
         End If
     End Sub
-
+    Dim binCloseAnticipated As Integer = 40
     Private Sub tmrBin_Tick(sender As Object, e As EventArgs) Handles tmrBin.Tick
         binCounter += 1
-        If binCounter = 40 Then SessionOver()
-        ' Me.Text = binCounter & "," & tasaLineaBase & "," & RespuestasBinPrevio()
+        Text = binCounter
+
+        If binCounter = 40 Or binCounter = binCloseAnticipated Then
+            tmrBin.Enabled = False
+            SessionOver()
+            Exit Sub
+        End If
+
+        ' Cambiar a fase 2 en bin 12
         If binCounter = 12 Then
             currentPhase = 2
             ChangePhase()
+
+            ' Calcular tasa de línea base
             Dim sumaLineaBase As Double = 0
             Dim totalValores As Integer = 0
             For boton = 0 To 4
                 For bin = 10 To 12
-                    sumaLineaBase += responses(boton, bin) ' Sumar respuestas de todos los botones en esos bins
-                    totalValores += 1
+                    ' Protección contra índices inválidos
+                    If bin >= 0 AndAlso bin < responses.GetLength(1) Then
+                        sumaLineaBase += responses(boton, bin)
+                        totalValores += 1
+                    End If
                 Next
             Next
-            ' Calcular el 20% del promedio de línea base
-            tasaLineaBase = (sumaLineaBase / totalValores) * 0.2
-        End If
 
-        If currentPhase = 2 Then
-            If binCounter = 12 Or binCounter = 13 Then
+            If totalValores > 0 Then
+                tasaLineaBase = (sumaLineaBase / totalValores) * 0.2
             Else
-                If binCounter >= 14 And binCounter < 36 Then
-                    If phaseChangeCheck = False Then
-                        If RespuestasBinPrevio() < tasaLineaBase Then
-                            phaseChangeCheck = True
-                        End If
-                    ElseIf phaseChangeCheck = True Then
-                        If RespuestasBinPrevio() < tasaLineaBase Then
-                            currentPhase = 3
-                            ChangePhase()
-                        Else
-                            phaseChangeCheck = False
-                        End If
-                    End If
-                Else
-                    currentPhase = 3
-                    ChangePhase()
-
-                End If
+                tasaLineaBase = 0
             End If
         End If
 
-        'Cerrar el programa
-        'Bienvenida e instrucciones
-        'Encuesta de satisfacciòn
-        'Conección Arduino
-        'PRUEBAS
+        ' Fase 2: Evaluar transición a fase 3
+        If currentPhase = 2 Then
+            If binCounter >= 14 AndAlso binCounter < 36 Then
+                If Not phaseChangeCheck Then
+                    If RespuestasBinPrevio() < tasaLineaBase Then
+                        phaseChangeCheck = True
+                    End If
+                Else
+                    If RespuestasBinPrevio() < tasaLineaBase Then
+                        currentPhase = 3
+                        binCloseAnticipated = binCounter + 3
+                        ChangePhase()
+                    Else
+                        phaseChangeCheck = False
+                    End If
+                End If
+            ElseIf binCounter >= 36 Then
+                ' Cambio forzado a fase 3 si ya pasaron muchos bins
+                currentPhase = 3
 
+                ChangePhase()
+            End If
+        End If
     End Sub
+
 
     Private Sub tmrVI_Tick(sender As Object, e As EventArgs) Handles tmrVI.Tick
         tmrVI.Enabled = False
@@ -256,13 +296,19 @@ Public Class MainH
         End If
     End Sub
 
-    Private Function RespuestasBinPrevio()
+    Private Function RespuestasBinPrevio() As Integer
         Dim rBinPrevio As Integer = 0
+        If binCounter <= 0 Then Return 0 ' Previene índice negativo
+
+        Dim binAnterior = binCounter - 1
         For boton = 0 To 4
-            rBinPrevio += responses(boton, binCounter - 1)
+            If binAnterior >= 0 AndAlso binAnterior < responses.GetLength(1) Then
+                rBinPrevio += responses(boton, binAnterior)
+            End If
         Next
         Return rBinPrevio
     End Function
+
 
     Private Sub tmrMasUno_Tick(sender As Object, e As EventArgs) Handles tmrMasUno.Tick
         tmrMasUno.Enabled = False
@@ -275,9 +321,9 @@ Public Class MainH
         player.PlayLooping()
     End Sub
 
+    Private Sub MainH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-
+    End Sub
 End Class
 
 

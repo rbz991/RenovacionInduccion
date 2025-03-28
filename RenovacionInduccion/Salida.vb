@@ -13,7 +13,7 @@
         ElseIf bt5.Checked = True Then
             punt += 5
         End If
-        WriteLine(1, "comentarios finales")
+        WriteLine(1, "Comentarios finales:")
         WriteLine(1, "///p1///")
         WriteLine(1, TextBox1.Text)
         WriteLine(1, "///p2///")
